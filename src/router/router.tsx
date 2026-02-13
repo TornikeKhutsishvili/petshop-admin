@@ -31,7 +31,7 @@ const router: RouteObject[] = [
       },
       {
         element: <AddCategoryPage />,
-        path: "/add-categories",
+        path: "/add-category",
       },
 
       // dynamic

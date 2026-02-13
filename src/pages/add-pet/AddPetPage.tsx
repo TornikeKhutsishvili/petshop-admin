@@ -1,5 +1,12 @@
 import React, { useState } from "react";
 import type { categoriesList } from "../../interfaces/categories.interface";
+import styled from "styled-components";
+
+const Container = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+`;
 
 interface FormData {
   [k: string]: FormDataEntryValue;
@@ -13,29 +20,31 @@ const AddPetPage: React.FC = () => {
   };
 
   return (
-    <form
-      className="form-container"
-      onSubmit={(e) => {
-        e.preventDefault();
-        const form = e.currentTarget;
-        const data = Object.fromEntries(new FormData(form));
-        onSave(data);
-      }}
-    >
-      <h2>Add New Pet</h2>
+    <Container>
+      <form
+        className="form-container"
+        onSubmit={(e) => {
+          e.preventDefault();
+          const form = e.currentTarget;
+          const data = Object.fromEntries(new FormData(form));
+          onSave(data);
+        }}
+      >
+        <h2>Add New Pet</h2>
 
-      <input name="name" placeholder="Pet name" required />
+        <input name="name" placeholder="Pet name" required />
 
-      <select name="categoryId" title="categories" required>
-        {categories.map((c) => (
-          <option key={c.id} value={c.id}>
-            {c.title}
-          </option>
-        ))}
-      </select>
+        <select name="categoryId" title="categories" required>
+          {categories.map((c) => (
+            <option key={c.id} value={c.id}>
+              {c.title}
+            </option>
+          ))}
+        </select>
 
-      <button type="submit">Save</button>
-    </form>
+        <button type="submit">Save</button>
+      </form>
+    </Container>
   );
 };
 
