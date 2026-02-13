@@ -1,14 +1,9 @@
-import React, { type PropsWithChildren } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import styled from "styled-components";
 
-type Page = "pets" | "categories" | "add-pet" | "add-category";
-
-interface LayoutProps extends PropsWithChildren {
-  activePage: Page;
-  onNavigate: (page: Page) => void;
-}
+export type Page = "pets" | "categories" | "add-pet" | "add-category";
 
 const Main = styled.main`
   max-width: 1200px;
@@ -16,15 +11,36 @@ const Main = styled.main`
   padding: 0 20px;
 `;
 
-const MainLayout: React.FC<LayoutProps> = ({
-  children,
-  activePage,
-  onNavigate,
-}) => {
+const pathToPage: Record<string, Page> = {
+  "/pets": "pets",
+  "/categories": "categories",
+  "/add-pet": "add-pet",
+  "/add-category": "add-category",
+};
+
+const pageToPath: Record<Page, string> = {
+  pets: "/pets",
+  categories: "/categories",
+  "add-pet": "/add-pet",
+  "add-category": "/add-category",
+};
+
+const MainLayout = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const activePage: Page = pathToPage[location.pathname] ?? "pets";
+
+  const onNavigate = (page: Page) => {
+    navigate(pageToPath[page]);
+  };
+
   return (
     <>
       <Header activePage={activePage} onNavigate={onNavigate} />
-      <Main>{children}</Main>
+      <Main>
+        <Outlet />
+      </Main>
       <Footer />
     </>
   );

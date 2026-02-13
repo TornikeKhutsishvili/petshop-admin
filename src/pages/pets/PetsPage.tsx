@@ -2,14 +2,16 @@ import type React from "react";
 import PetCard from "../../components/pets/pet-card/PetCard";
 import type { animalsList } from "../../interfaces/animals.interface";
 import type { categoriesList } from "../../interfaces/categories.interface";
+import { useState } from "react";
 
-interface Props {
-  pets: animalsList[];
-  categories: categoriesList[];
-  onSelectPet: (id: number) => void;
-}
+const PetsPage: React.FC = () => {
+  const [pets] = useState<animalsList[]>([]);
+  const [categories] = useState<categoriesList[]>([]);
 
-const PetsPage: React.FC<Props> = ({ pets, categories, onSelectPet }) => {
+  const onSelectPet = (id: number) => {
+    console.log("Selected pet:", id);
+  };
+
   return (
     <div className="page active">
       <div className="action-bar">

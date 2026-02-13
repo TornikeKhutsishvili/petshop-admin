@@ -1,4 +1,6 @@
-const PetDetailPage = () => {
+import type React from "react";
+
+const PetDetailPage: React.FC = () => {
   return (
     <>
       <div></div>

@@ -2,11 +2,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import router from "./router/router";
 
 function App() {
-  return (
-    <>
-      <RouterProvider router={createBrowserRouter(router)} />
-    </>
-  );
+  const browserRouter = createBrowserRouter(router);
+
+  return <RouterProvider router={browserRouter} />;
 }
 
 export default App;

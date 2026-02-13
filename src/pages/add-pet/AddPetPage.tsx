@@ -1,16 +1,17 @@
-import type React from "react";
+import React, { useState } from "react";
 import type { categoriesList } from "../../interfaces/categories.interface";
-
-interface Props {
-  categories: categoriesList[];
-  onSave: (data: FormData) => void;
-}
 
 interface FormData {
   [k: string]: FormDataEntryValue;
 }
 
-const AddPetPage: React.FC<Props> = ({ categories, onSave }) => {
+const AddPetPage: React.FC = () => {
+  const [categories] = useState<categoriesList[]>([]);
+
+  const onSave = (data: FormData) => {
+    console.log("Saved pet:", data);
+  };
+
   return (
     <form
       className="form-container"
