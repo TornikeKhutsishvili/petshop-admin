@@ -30,7 +30,7 @@ const animalsSlice = createSlice({
     builder
       // GET
       .addCase(getAnimals.pending, (state) => {
-        state.loading;
+        state.loading = true;
       })
       .addCase(getAnimals.fulfilled, (state, action) => {
         state.loading = false;
@@ -44,7 +44,7 @@ const animalsSlice = createSlice({
 
       // ADD
       .addCase(addAnimal.pending, (state) => {
-        state.loading;
+        state.loading = true;
       })
       .addCase(addAnimal.fulfilled, (state, action) => {
         state.animalsList.push(action.payload);
@@ -56,7 +56,7 @@ const animalsSlice = createSlice({
 
       // UPDATE
       .addCase(updateAnimal.pending, (state) => {
-        state.loading;
+        state.loading = true;
       })
       .addCase(updateAnimal.fulfilled, (state, action) => {
         const index = state.animalsList.findIndex(
@@ -71,7 +71,7 @@ const animalsSlice = createSlice({
 
       // DELETE
       .addCase(deleteAnimal.pending, (state) => {
-        state.loading;
+        state.loading = true;
       })
       .addCase(deleteAnimal.fulfilled, (state, action) => {
         state.animalsList = state.animalsList.filter(

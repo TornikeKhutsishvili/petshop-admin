@@ -30,7 +30,7 @@ const animals_with_categoriesSlice = createSlice({
     builder
       // GET
       .addCase(get_animals_with_categories.pending, (state) => {
-        state.loading;
+        state.loading = true;
       })
       .addCase(get_animals_with_categories.fulfilled, (state, action) => {
         state.loading = false;
@@ -44,7 +44,7 @@ const animals_with_categoriesSlice = createSlice({
 
       // ADD
       .addCase(add_animal_with_category.pending, (state) => {
-        state.loading;
+        state.loading = true;
       })
       .addCase(add_animal_with_category.fulfilled, (state, action) => {
         state.animals_with_categoriesList.push(action.payload);
@@ -56,7 +56,7 @@ const animals_with_categoriesSlice = createSlice({
 
       // UPDATE
       .addCase(update_animal_with_category.pending, (state) => {
-        state.loading;
+        state.loading = true;
       })
       .addCase(update_animal_with_category.fulfilled, (state, action) => {
         const index = state.animals_with_categoriesList.findIndex(
@@ -72,7 +72,7 @@ const animals_with_categoriesSlice = createSlice({
 
       // DELETE
       .addCase(delete_animal_with_category.pending, (state) => {
-        state.loading;
+        state.loading = true;
       })
       .addCase(delete_animal_with_category.fulfilled, (state, action) => {
         state.animals_with_categoriesList =
@@ -90,19 +90,19 @@ const animals_with_categoriesSlice = createSlice({
 export default animals_with_categoriesSlice.reducer;
 
 export const animals_with_categoriesStateSelector = (state: RootState) =>
-  state.categories;
+  state.animals_with_categories;
 
-export const categoriesListSelector = createSelector(
+export const animalsWithCategoriesListSelector = createSelector(
   animals_with_categoriesStateSelector,
-  (state) => state.categoriesList,
+  (state) => state.animals_with_categoriesList,
 );
 
-export const categoriesLoadingSelector = createSelector(
+export const animalsWithCategoriesLoadingSelector = createSelector(
   animals_with_categoriesStateSelector,
   (state) => state.loading,
 );
 
-export const categoriesErrorSelector = createSelector(
+export const animalsWithCategoriesErrorSelector = createSelector(
   animals_with_categoriesStateSelector,
   (state) => state.error,
 );

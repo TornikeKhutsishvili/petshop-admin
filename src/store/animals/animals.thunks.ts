@@ -39,7 +39,7 @@ export const addAnimal = createAsyncThunk<
 // UPDATE
 export const updateAnimal = createAsyncThunk<
   animalsList,
-  { id: number; category: animalsList },
+  { id: number; animal: animalsList },
   { rejectValue: string }
 >("animals/updateAnimal", async ({ id, animal }, thunkAPI) => {
   try {
@@ -56,10 +56,10 @@ export const updateAnimal = createAsyncThunk<
 
 // DELETE
 export const deleteAnimal = createAsyncThunk<
-  string,
-  string,
+  number,
+  number,
   { rejectValue: string }
->("animals/deleteCategory", async (id, thunkAPI) => {
+>("animals/deleteAnimal", async (id, thunkAPI) => {
   try {
     await fetch(`${BASE_URL}/${id}`, { method: "DELETE" });
     return id;
