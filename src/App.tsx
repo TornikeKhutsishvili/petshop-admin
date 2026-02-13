@@ -4,9 +4,7 @@ import router from "./router/router";
 function App() {
   return (
     <>
-      <div className="app">
-        <RouterProvider router={createBrowserRouter(router)} />
-      </div>
+      <RouterProvider router={createBrowserRouter(router)} />
     </>
   );
 }
