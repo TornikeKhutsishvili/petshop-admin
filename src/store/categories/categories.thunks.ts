@@ -56,8 +56,8 @@ export const updateCategory = createAsyncThunk<
 
 // DELETE
 export const deleteCategory = createAsyncThunk<
-  string,
-  string,
+  number,
+  number,
   { rejectValue: string }
 >("categories/deleteCategory", async (id, thunkAPI) => {
   try {
