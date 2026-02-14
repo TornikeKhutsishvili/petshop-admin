@@ -1,14 +1,14 @@
 import React from "react";
-import { HeaderWrapper, Logo, Nav, NavButton } from "./Header.styles";
-import styled from "styled-components";
+import {
+  Container,
+  HeaderWrapper,
+  Title,
+  Subtitle,
+  Nav,
+  NavButton,
+} from "./Header.styles";
 
-export type Page = "/" | "categories" | "add-pet" | "add-category";
-
-const Container = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
-`;
+export type Page = "pets" | "categories" | "add-pet" | "add-category";
 
 interface HeaderProps {
   activePage: Page;
@@ -19,38 +19,39 @@ const Header: React.FC<HeaderProps> = ({ activePage, onNavigate }) => {
   return (
     <Container>
       <HeaderWrapper>
-        <Logo>🐾 Pet Shop Admin</Logo>
-
-        <Nav>
-          <NavButton
-            $active={activePage === "/"}
-            onClick={() => onNavigate("/")}
-          >
-            Pets
-          </NavButton>
-
-          <NavButton
-            $active={activePage === "categories"}
-            onClick={() => onNavigate("categories")}
-          >
-            Categories
-          </NavButton>
-
-          <NavButton
-            $active={activePage === "add-pet"}
-            onClick={() => onNavigate("add-pet")}
-          >
-            + Add Pet
-          </NavButton>
-
-          <NavButton
-            $active={activePage === "add-category"}
-            onClick={() => onNavigate("add-category")}
-          >
-            + Add Category
-          </NavButton>
-        </Nav>
+        <Title>🐾 Pet Shop Admin</Title>
+        <Subtitle>Manage your pets and categories with elegance</Subtitle>
       </HeaderWrapper>
+
+      <Nav>
+        <NavButton
+          $active={activePage === "pets"}
+          onClick={() => onNavigate("pets")}
+        >
+          Pets
+        </NavButton>
+
+        <NavButton
+          $active={activePage === "categories"}
+          onClick={() => onNavigate("categories")}
+        >
+          Categories
+        </NavButton>
+
+        <NavButton
+          $active={activePage === "add-pet"}
+          onClick={() => onNavigate("add-pet")}
+        >
+          + Add Pet
+        </NavButton>
+
+        <NavButton
+          $active={activePage === "add-category"}
+          onClick={() => onNavigate("add-category")}
+        >
+          + Add Category
+        </NavButton>
+      </Nav>
     </Container>
   );
 };

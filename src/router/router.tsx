@@ -2,6 +2,7 @@ import type { RouteObject } from "react-router-dom";
 // Layout
 import MainLayout from "../layout/MainLayout.tsx";
 // Pages
+import Index from "../pages/index.tsx";
 import PetsPage from "../pages/pets/PetsPage.tsx";
 import CategoriesPage from "../pages/categories/CategoriesPage.tsx";
 import AddPetPage from "../pages/add-pet/AddPetPage.tsx";
@@ -18,8 +19,12 @@ const router: RouteObject[] = [
     element: <MainLayout />,
     children: [
       {
+        element: <Index />,
+        index: true,
+      },
+      {
         element: <PetsPage />,
-        path: "/",
+        path: "/pets",
       },
       {
         element: <CategoriesPage />,

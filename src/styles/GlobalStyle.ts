@@ -8,18 +8,15 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    background-color: #F8F9FA;
-    color: #2D3748;
+    font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f8f9fa;
+    min-height: 100vh;
+    color: #2d3748;
+    font-weight: 400;
     line-height: 1.6;
   }
 
   a {
     text-decoration: none;
-    color: inherit;
-  }
-
-  button {
-    font-family: inherit;
   }
 `;
