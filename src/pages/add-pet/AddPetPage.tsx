@@ -1,43 +1,91 @@
-import React, { useState } from "react";
-import type { categoriesList } from "../../interfaces/categories.interface";
-import { Container } from "./AddPetPage.style";
-
-interface FormData {
-  [k: string]: FormDataEntryValue;
-}
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  Container,
+  BtnBack,
+  FormContainer,
+  FormTitle,
+  Form,
+  FormGroup,
+  FormLabel,
+  FormInput,
+  FormSelect,
+  Option,
+  TextArea,
+  FormCheck,
+  FormCheckInput,
+  BtnActions,
+  CancelBtn,
+  SaveBtn,
+} from "./AddPetPage.style";
 
 const AddPetPage: React.FC = () => {
-  const [categories] = useState<categoriesList[]>([]);
-
-  const onSave = (data: FormData) => {
-    console.log("Saved pet:", data);
-  };
+  const navigation = useNavigate();
+  const addPet = () => {};
+  const handleCancel = () => {};
 
   return (
     <Container>
-      <form
-        className="form-container"
-        onSubmit={(e) => {
-          e.preventDefault();
-          const form = e.currentTarget;
-          const data = Object.fromEntries(new FormData(form));
-          onSave(data);
-        }}
-      >
-        <h2>Add New Pet</h2>
+      <BtnBack onClick={() => navigation("/pets")}>← Back to Pets</BtnBack>
 
-        <input name="name" placeholder="Pet name" required />
+      <FormContainer>
+        <FormTitle>Add New Pet</FormTitle>
+        <Form onSubmit={addPet}>
+          <FormGroup>
+            <FormLabel>Pet Name</FormLabel>
+            <FormInput type="text" name="name" required></FormInput>
+          </FormGroup>
 
-        <select name="categoryId" title="categories" required>
-          {categories.map((c) => (
-            <option key={c.id} value={c.id}>
-              {c.title}
-            </option>
-          ))}
-        </select>
+          <FormGroup>
+            <FormLabel>Category</FormLabel>
+            <FormSelect name="category" required>
+              <Option value={""}></Option>
+            </FormSelect>
+          </FormGroup>
 
-        <button type="submit">Save</button>
-      </form>
+          <FormGroup>
+            <FormLabel>Price (USD)</FormLabel>
+            <FormInput
+              type="number"
+              name="priceUSD"
+              step="0.01"
+              required
+            ></FormInput>
+          </FormGroup>
+
+          <FormGroup>
+            <FormLabel>Price (GEL)</FormLabel>
+            <FormInput
+              type="number"
+              name="priceGEL"
+              step="0.01"
+              required
+            ></FormInput>
+          </FormGroup>
+
+          <FormGroup>
+            <FormLabel>Stock</FormLabel>
+            <FormInput type="number" name="stock" required></FormInput>
+          </FormGroup>
+
+          <FormGroup>
+            <FormLabel>Description</FormLabel>
+            <TextArea name="description" rows={4}></TextArea>
+          </FormGroup>
+
+          <FormGroup>
+            <FormCheck>
+              <FormCheckInput type="checkbox" name="isPopular"></FormCheckInput>
+              <FormLabel>Popular Pet</FormLabel>
+            </FormCheck>
+          </FormGroup>
+
+          <BtnActions>
+            <CancelBtn onClick={handleCancel}>Cancel</CancelBtn>
+            <SaveBtn>Save Pet</SaveBtn>
+          </BtnActions>
+        </Form>
+      </FormContainer>
     </Container>
   );
 };
