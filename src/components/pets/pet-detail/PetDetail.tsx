@@ -22,8 +22,6 @@ interface Props {
   onClose?: () => void;
 }
 
-const petEmojis = ["🐕", "🐱", "🐦", "🐠", "🐰", "🐹", "🦔", "🐢"];
-
 const PetDetail: React.FC<Props> = ({ petId, onClose }) => {
   const pets = useSelector(animalsListSelector);
   const categories = useSelector(categoriesListSelector);
@@ -35,14 +33,16 @@ const PetDetail: React.FC<Props> = ({ petId, onClose }) => {
 
   if (!pet) return null;
 
-  const emoji = petEmojis[pet.id % petEmojis.length];
-
   return (
     <Wrapper>
       <Card>
-        {onClose && <button onClick={onClose}>✖</button>}
+        {onClose && (
+          <button type="button" onClick={onClose}>
+            ✖
+          </button>
+        )}
 
-        <Image>{emoji}</Image>
+        <Image>{pet.image}</Image>
 
         <Name>{pet.name}</Name>
 

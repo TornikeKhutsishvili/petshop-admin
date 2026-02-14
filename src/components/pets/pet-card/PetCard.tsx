@@ -23,7 +23,7 @@ interface Props {
 
 const PetCard: React.FC<Props> = ({ pet, category, onClick }) => {
   return (
-    <Card onClick={onClick}>
+    <Card key={pet.id} onClick={onClick}>
       <Image>{pet.image}</Image>
 
       <Name>{pet.name}</Name>

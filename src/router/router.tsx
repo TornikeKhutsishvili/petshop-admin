@@ -2,7 +2,7 @@ import type { RouteObject } from "react-router-dom";
 // Layout
 import MainLayout from "../layout/MainLayout.tsx";
 // Pages
-import Index from "../pages/index.tsx";
+import Index from "../pages/Index.tsx";
 import PetsPage from "../pages/pets/PetsPage.tsx";
 import CategoriesPage from "../pages/categories/CategoriesPage.tsx";
 import AddPetPage from "../pages/add-pet/AddPetPage.tsx";

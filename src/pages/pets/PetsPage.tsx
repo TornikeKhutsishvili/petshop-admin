@@ -1,4 +1,5 @@
 import type React from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import PetCard from "../../components/pets/pet-card/PetCard";
 import type { animalsList } from "../../interfaces/animals.interface";
@@ -19,6 +20,7 @@ import {
 } from "./PetsPage.style";
 
 const PetsPage: React.FC = () => {
+  const navigation = useNavigate();
   const pets = useSelector(animalsListSelector);
   const loading = useSelector(animalsLoadingSelector);
   const error = useSelector(animalsErrorSelector);
@@ -37,7 +39,7 @@ const PetsPage: React.FC = () => {
       <Page>
         <ActionBar>
           <Title>All Pets</Title>
-          <Button>➕ Add New Pet</Button>
+          <Button onClick={() => navigation("/add-pet")}>➕ Add New Pet</Button>
         </ActionBar>
 
         <CardsGrid>

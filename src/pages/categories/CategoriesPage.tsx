@@ -1,4 +1,5 @@
 import type React from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import CategoryCard from "../../components/categories/CategoryCard";
 import {
@@ -6,9 +7,16 @@ import {
   categoriesLoadingSelector,
   categoriesErrorSelector,
 } from "../../store/categories/categories.slice";
-import { Container, Grid, Title } from "./CategoriesPage.style";
+import {
+  Container,
+  Grid,
+  Title,
+  ActionBar,
+  Button,
+} from "./CategoriesPage.style";
 
 const CategoriesPage: React.FC = () => {
+  const navigation = useNavigate();
   const categories = useSelector(categoriesListSelector);
   const loading = useSelector(categoriesLoadingSelector);
   const error = useSelector(categoriesErrorSelector);
@@ -18,7 +26,12 @@ const CategoriesPage: React.FC = () => {
 
   return (
     <Container>
-      <Title>Categories</Title>
+      <ActionBar>
+        <Title>Categories</Title>
+        <Button onClick={() => navigation("/add-category")}>
+          ➕ Add New Category
+        </Button>
+      </ActionBar>
 
       <Grid>
         {categories.map((category) => (
