@@ -1,5 +1,5 @@
 import type React from "react";
-import { Container } from "./EditPetPage.style";
+import { Container } from "./EditCategoryPage.style";
 
 const EditPetPage: React.FC = () => {
   return (

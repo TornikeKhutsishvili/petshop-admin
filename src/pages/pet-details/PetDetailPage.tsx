@@ -1,4 +1,5 @@
 import type React from "react";
+import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import type { animalsList } from "../../interfaces/animals.interface";
 import type { categoriesList } from "../../interfaces/categories.interface";
@@ -25,12 +26,9 @@ import {
   Actions,
 } from "./PetDetailPage.style";
 
-interface Props {
-  petId: number;
-  onClose?: () => void;
-}
-
-const PetDetailPage: React.FC<Props> = ({ petId, onClose }) => {
+const PetDetailPage: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const petId = Number(id);
   const pets = useSelector(animalsListSelector);
   const categories = useSelector(categoriesListSelector);
 
@@ -46,12 +44,6 @@ const PetDetailPage: React.FC<Props> = ({ petId, onClose }) => {
       <BtnBack>← Back to Pets</BtnBack>
 
       <PetDetail>
-        {onClose && (
-          <button type="button" onClick={onClose}>
-            ✖
-          </button>
-        )}
-
         <PetDetailHeader>
           <PetDetailImage>{pet.image}</PetDetailImage>
 

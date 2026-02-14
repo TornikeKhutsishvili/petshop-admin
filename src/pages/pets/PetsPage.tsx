@@ -1,7 +1,7 @@
 import type React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import PetCard from "../../components/pets/pet-card/PetCard";
+import PetCard from "../../components/pets/PetCard";
 import type { animalsList } from "../../interfaces/animals.interface";
 import type { categoriesList } from "../../interfaces/categories.interface";
 import {

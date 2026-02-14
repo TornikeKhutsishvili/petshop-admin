@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import type { categoriesList } from "../../interfaces/categories.interface";
-import styled from "styled-components";
-
-const Container = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
-`;
+import { Container } from "./AddPetPage.style";
 
 interface FormData {
   [k: string]: FormDataEntryValue;
