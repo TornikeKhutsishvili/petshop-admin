@@ -19,7 +19,7 @@ const router: RouteObject[] = [
     children: [
       {
         element: <PetsPage />,
-        path: "/pets",
+        path: "/",
       },
       {
         element: <CategoriesPage />,

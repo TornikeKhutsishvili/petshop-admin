@@ -2,7 +2,7 @@ import React from "react";
 import { HeaderWrapper, Logo, Nav, NavButton } from "./Header.styles";
 import styled from "styled-components";
 
-export type Page = "pets" | "categories" | "add-pet" | "add-category";
+export type Page = "/" | "categories" | "add-pet" | "add-category";
 
 const Container = styled.div`
   max-width: 1200px;
@@ -23,8 +23,8 @@ const Header: React.FC<HeaderProps> = ({ activePage, onNavigate }) => {
 
         <Nav>
           <NavButton
-            $active={activePage === "pets"}
-            onClick={() => onNavigate("pets")}
+            $active={activePage === "/"}
+            onClick={() => onNavigate("/")}
           >
             Pets
           </NavButton>
