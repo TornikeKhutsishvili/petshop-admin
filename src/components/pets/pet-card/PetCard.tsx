@@ -1,6 +1,19 @@
 import type React from "react";
 import type { animalsList } from "../../../interfaces/animals.interface";
 import type { categoriesList } from "../../../interfaces/categories.interface";
+import {
+  Card,
+  Image,
+  Name,
+  Category,
+  Price,
+  PriceItemUSD,
+  PriceItemGEL,
+  Description,
+  Stats,
+  Badge,
+  Stock,
+} from "./PetCard.style";
 
 interface Props {
   pet: animalsList;
@@ -10,18 +23,25 @@ interface Props {
 
 const PetCard: React.FC<Props> = ({ pet, category, onClick }) => {
   return (
-    <>
-      <div className="pet-card" onClick={onClick}>
-        <div className="pet-image">🐾</div>
-        <div className="pet-name">{pet.name}</div>
-        <div className="pet-category">{category?.title}</div>
-        <div className="pet-price">
-          <span>${pet.priceUSD}</span>
-          <span>₾{pet.priceGEL}</span>
-        </div>
-        {pet.isPopular && <span className="popular-badge">Popular</span>}
-      </div>
-    </>
+    <Card onClick={onClick}>
+      <Image>{pet.image}</Image>
+
+      <Name>{pet.name}</Name>
+
+      <Category>{category?.title || "No Category"}</Category>
+
+      <Price>
+        <PriceItemUSD>${pet.priceUSD}</PriceItemUSD>
+        <PriceItemGEL>₾{pet.priceGEL}</PriceItemGEL>
+      </Price>
+
+      <Description>{pet.description}</Description>
+
+      <Stats>
+        {pet.isPopular && <Badge>Popular</Badge>}
+        <Stock></Stock>
+      </Stats>
+    </Card>
   );
 };
 

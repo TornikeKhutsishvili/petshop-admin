@@ -1,42 +1,56 @@
 import type React from "react";
+import { useSelector } from "react-redux";
 import PetCard from "../../components/pets/pet-card/PetCard";
 import type { animalsList } from "../../interfaces/animals.interface";
 import type { categoriesList } from "../../interfaces/categories.interface";
-import { useState } from "react";
-import styled from "styled-components";
-
-const Container = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
-`;
+import {
+  animalsListSelector,
+  animalsLoadingSelector,
+  animalsErrorSelector,
+} from "../../store/animals/animals.slice";
+import { categoriesListSelector } from "../../store/categories/categories.slice";
+import {
+  Container,
+  Page,
+  ActionBar,
+  Title,
+  Button,
+  CardsGrid,
+} from "./PetsPage.style";
 
 const PetsPage: React.FC = () => {
-  const [pets] = useState<animalsList[]>([]);
-  const [categories] = useState<categoriesList[]>([]);
+  const pets = useSelector(animalsListSelector);
+  const loading = useSelector(animalsLoadingSelector);
+  const error = useSelector(animalsErrorSelector);
+
+  const categories = useSelector(categoriesListSelector);
 
   const onSelectPet = (id: number) => {
     console.log("Selected pet:", id);
   };
 
+  if (loading) return <Container>Loading pets...</Container>;
+  if (error) return <Container>{error}</Container>;
+
   return (
     <Container>
-      <div className="page active">
-        <div className="action-bar">
-          <h2>All Pets</h2>
-        </div>
+      <Page>
+        <ActionBar>
+          <Title>All Pets</Title>
+          <Button>➕ Add New Pet</Button>
+        </ActionBar>
 
-        <div className="cards-grid">
-          {pets.map((pet) => (
+        <CardsGrid>
+          {pets.map((pet: animalsList) => (
             <PetCard
               key={pet.id}
               pet={pet}
-              category={categories.find((c) => c.id === pet.id)}
+              category={categories.find((c: categoriesList) => c.id === pet.id)}
               onClick={() => onSelectPet(pet.id)}
             />
           ))}
-        </div>
-      </div>
+        </CardsGrid>
+      </Page>
     </Container>
   );
 };

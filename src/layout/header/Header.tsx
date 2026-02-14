@@ -19,7 +19,7 @@ const Header: React.FC<HeaderProps> = ({ activePage, onNavigate }) => {
   return (
     <Container>
       <HeaderWrapper>
-        <Title>🐾 Pet Shop Admin</Title>
+        <Title>🐾 Pet Shop Admin Panel</Title>
         <Subtitle>Manage your pets and categories with elegance</Subtitle>
       </HeaderWrapper>
 
@@ -42,14 +42,14 @@ const Header: React.FC<HeaderProps> = ({ activePage, onNavigate }) => {
           $active={activePage === "add-pet"}
           onClick={() => onNavigate("add-pet")}
         >
-          + Add Pet
+          Add Pet
         </NavButton>
 
         <NavButton
           $active={activePage === "add-category"}
           onClick={() => onNavigate("add-category")}
         >
-          + Add Category
+          Add Category
         </NavButton>
       </Nav>
     </Container>
