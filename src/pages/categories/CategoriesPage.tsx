@@ -19,6 +19,7 @@ import { useEffect } from "react";
 import { getCategories } from "../../store/categories/categories.thunks";
 import { getAnimals } from "../../store/animals/animals.thunks";
 import { animalsWithCategoriesListSelector } from "../../store/animals_with_categories/animals_with_categories.slice";
+import { get_animals_with_categories } from "../../store/animals_with_categories/animals_with_categories.thunks";
 
 const CategoriesPage: React.FC = () => {
   const navigation = useNavigate();
@@ -32,6 +33,7 @@ const CategoriesPage: React.FC = () => {
   useEffect(() => {
     dispatch(getCategories());
     dispatch(getAnimals());
+    dispatch(get_animals_with_categories());
   }, [dispatch]);
 
   const handleEditCategory = (id: number) => {
@@ -58,9 +60,9 @@ const CategoriesPage: React.FC = () => {
 
       <Grid>
         {categories.map((category) => {
-          const petsCount = animalCategories.filter((pet) =>
-            pet.category_id?.includes(category.id),
-          ).length;
+          const petsCount = animalCategories
+            .filter((relation) => relation.category_id.includes(category.id))
+            .reduce((total, relation) => total + relation.animal_id.length, 0);
 
           return (
             <CategoryCard

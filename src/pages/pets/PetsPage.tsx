@@ -15,6 +15,7 @@ import {
 // Interfaces
 import PetCard from "../../components/pets/PetCard";
 import type { animalsList } from "../../interfaces/animals.interface";
+import type { categoriesList } from "../../interfaces/categories.interface";
 
 // redux store
 import { useDispatch, useSelector } from "react-redux";
@@ -35,16 +36,20 @@ const PetsPage: React.FC = () => {
 
   const pets = useSelector(animalsListSelector);
   const categories = useSelector(categoriesListSelector);
+  const animalCategories = useSelector(animalsWithCategoriesListSelector);
   const loading = useSelector(animalsLoadingSelector);
   const error = useSelector(animalsErrorSelector);
-  const animalCategories = useSelector(animalsWithCategoriesListSelector);
 
-  const getCategoryByAnimal = (animalId: number) => {
+  const getCategoryByAnimal = (
+    animalId: number,
+  ): categoriesList | undefined => {
     const relation = animalCategories.find((r) =>
       r.animal_id.includes(animalId),
     );
+    if (!relation || !relation.category_id?.length) return undefined;
+    const categoryId = relation.category_id[0];
 
-    return categories.find((c) => c.id === relation?.category_id[0]);
+    return categories.find((c) => c.id === categoryId);
   };
 
   useEffect(() => {
