@@ -124,8 +124,18 @@
   "animals_with_categories": [
     {
       "id": 1,
-      "animal_id": [],
-      "category_id": []
+      "animal_id": [1, 4, 8],
+      "category_id": [1]
+    },
+    {
+      "id": 2,
+      "animal_id": [2, 3, 5, 7],
+      "category_id": [3]
+    },
+    {
+      "id": 3,
+      "animal_id": [6],
+      "category_id": [2]
     }
   ]
 }

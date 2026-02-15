@@ -22,7 +22,6 @@ export const Title = styled.h2`
   color: #2d3748;
   font-size: 1.6rem;
   font-weight: 600;
-  margin-bottom: 24px;
 `;
 
 export const Button = styled.button`

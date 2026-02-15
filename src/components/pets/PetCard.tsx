@@ -1,8 +1,9 @@
 import type React from "react";
-import type { animalsList } from "../../../interfaces/animals.interface";
-import type { categoriesList } from "../../../interfaces/categories.interface";
+import type { animalsList } from "../../interfaces/animals.interface";
+import type { categoriesList } from "../../interfaces/categories.interface";
 import {
   Card,
+  ImageDiv,
   Image,
   Name,
   Category,
@@ -14,6 +15,7 @@ import {
   Badge,
   Stock,
 } from "./PetCard.style";
+import { useCurrencyConverter } from "../../hooks/useCurrencyConverter";
 
 interface Props {
   pet: animalsList;
@@ -22,24 +24,39 @@ interface Props {
 }
 
 const PetCard: React.FC<Props> = ({ pet, category, onClick }) => {
+  const { converted: priceGEL, loading: gelLoading } = useCurrencyConverter(
+    pet.price,
+    "usd",
+    "gel",
+  );
+
   return (
     <Card key={pet.id} onClick={onClick}>
-      <Image>{pet.image}</Image>
+      <ImageDiv>
+        <Image src={pet.image} alt={pet.name} />
+      </ImageDiv>
 
       <Name>{pet.name}</Name>
 
       <Category>{category?.title || "No Category"}</Category>
 
       <Price>
-        <PriceItemUSD>${pet.priceUSD}</PriceItemUSD>
-        <PriceItemGEL>₾{pet.priceGEL}</PriceItemGEL>
+        <PriceItemUSD>
+          ${typeof pet.price === "number" ? pet.price.toFixed(2) : "0.00"}
+        </PriceItemUSD>
+
+        <PriceItemGEL>
+          {gelLoading
+            ? "₾..."
+            : `₾${typeof priceGEL === "number" ? priceGEL.toFixed(2) : "0.00"}`}
+        </PriceItemGEL>
       </Price>
 
       <Description>{pet.description}</Description>
 
       <Stats>
-        {pet.isPopular && <Badge>Popular</Badge>}
-        <Stock></Stock>
+        {pet.popular && <Badge>Popular</Badge>}
+        <Stock>Stock: {pet.inStock}</Stock>
       </Stats>
     </Card>
   );

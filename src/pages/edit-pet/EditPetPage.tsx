@@ -28,7 +28,7 @@ const EditPetPage: React.FC = () => {
   return (
     <>
       <Container>
-        <BtnBack onClick={() => navigation("/pets")}>← Back</BtnBack>
+        <BtnBack onClick={() => navigation("/pets")}>← Back to pets</BtnBack>
 
         <FormContainer>
           <FormTitle>Edit Pet</FormTitle>

@@ -12,6 +12,7 @@ import type { categoriesList } from "../../interfaces/categories.interface";
 
 interface Props {
   category: categoriesList;
+  petsCount?: number;
   onClick: () => void;
   onEdit?: (id: number) => void;
   onDelete?: (id: number) => void;
@@ -19,6 +20,7 @@ interface Props {
 
 const CategoryCard: React.FC<Props> = ({
   category,
+  petsCount = 0,
   onEdit,
   onClick,
   onDelete,
@@ -37,7 +39,11 @@ const CategoryCard: React.FC<Props> = ({
     <Card key={category.id} onClick={onClick}>
       <Title>{category.title}</Title>
       <Description>{category.description}</Description>
-      <CountPet>{}</CountPet>
+
+      <CountPet>
+        {petsCount} pet{petsCount !== 1 ? "s" : ""}
+      </CountPet>
+
       <CardAction>
         <EditButton onClick={handleEdit}>Edit</EditButton>
         <DeleteButton onClick={handleDelete}>Delete</DeleteButton>

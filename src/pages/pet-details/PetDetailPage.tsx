@@ -1,20 +1,18 @@
-import type React from "react";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import type { animalsList } from "../../interfaces/animals.interface";
-import type { categoriesList } from "../../interfaces/categories.interface";
-import { animalsListSelector } from "../../store/animals/animals.slice";
-import { categoriesListSelector } from "../../store/categories/categories.slice";
+import React from "react";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
+// Styles
 import {
   Wrapper,
   BtnBack,
   PetDetail,
   PetDetailHeader,
+  PetDetailImageDiv,
   PetDetailImage,
   PetDetailInfo,
   PetDetailName,
   PetDetailCategory,
-  PetDetailDescription,
   PetDetailPrices,
   PriceDetail,
   PriceLabel,
@@ -23,29 +21,71 @@ import {
   PriceValueStock,
   PetDetailBadge,
   PetDetailSection,
+  PetDetailSectionH3,
+  PetDetailDescriptionWrapper,
+  PetDetailDescriptionP,
   Actions,
+  EditButton,
+  DeleteButton,
 } from "./PetDetailPage.style";
 
+// Redux store
+import { useDispatch, useSelector } from "react-redux";
+import {
+  animalsListSelector,
+  animalsLoadingSelector,
+} from "../../store/animals/animals.slice";
+import { getAnimals } from "../../store/animals/animals.thunks";
+import { getCategories } from "../../store/categories/categories.thunks";
+import { categoriesListSelector } from "../../store/categories/categories.slice";
+import { animalsWithCategoriesListSelector } from "../../store/animals_with_categories/animals_with_categories.slice";
+import type { AppDispatch } from "../../store";
+import { useCurrencyConverter } from "../../hooks/useCurrencyConverter";
+
 const PetDetailPage: React.FC = () => {
+  const navigation = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams<{ id: string }>();
-  const petId = Number(id);
+
   const pets = useSelector(animalsListSelector);
   const categories = useSelector(categoriesListSelector);
+  const animalCategories = useSelector(animalsWithCategoriesListSelector);
+  const loading = useSelector(animalsLoadingSelector);
 
-  const pet: animalsList | undefined = pets.find((p) => p.id === petId);
-  const category: categoriesList | undefined = categories.find(
-    (c) => c.id === pet?.id,
+  const getCategoryByAnimal = (animalId: number) => {
+    const relation = animalCategories.find((r) =>
+      r.animal_id.includes(animalId),
+    );
+    return categories.find((c) => c.id === relation?.category_id[0]);
+  };
+
+  useEffect(() => {
+    dispatch(getAnimals());
+    dispatch(getCategories());
+  }, [dispatch]);
+
+  const petId = Number(id);
+  const pet = pets.find((p) => p.id === petId);
+  const category = pet ? getCategoryByAnimal(pet.id) : null;
+
+  const { converted: priceGEL, loading: gelLoading } = useCurrencyConverter(
+    pet?.price || 0,
+    "usd",
+    "gel",
   );
 
-  if (!pet) return null;
+  if (loading) return <Wrapper>Loading pets...</Wrapper>;
+  if (!pet) return <Wrapper>Pet not found</Wrapper>;
 
   return (
-    <Wrapper>
-      <BtnBack>← Back to Pets</BtnBack>
+    <>
+      <BtnBack onClick={() => navigation(-1)}>← Back to Pets</BtnBack>
 
       <PetDetail>
         <PetDetailHeader>
-          <PetDetailImage>{pet.image}</PetDetailImage>
+          <PetDetailImageDiv>
+            <PetDetailImage src={pet.image} alt={pet.name} />
+          </PetDetailImageDiv>
 
           <PetDetailInfo>
             <PetDetailName>{pet.name}</PetDetailName>
@@ -56,30 +96,50 @@ const PetDetailPage: React.FC = () => {
 
             <PetDetailPrices>
               <PriceDetail>
-                <PriceLabel></PriceLabel>
-                <PriceValueUSD>${pet.priceUSD}</PriceValueUSD>
+                <PriceLabel>Price USD</PriceLabel>
+                <PriceValueUSD>
+                  {typeof pet.price === "number"
+                    ? `$${pet.price.toFixed(2)}`
+                    : "0.00"}
+                </PriceValueUSD>
               </PriceDetail>
               <PriceDetail>
-                <PriceLabel></PriceLabel>
-                <PriceValueGEL>₾{pet.priceGEL}</PriceValueGEL>
+                <PriceLabel>Price GEL</PriceLabel>
+                <PriceValueGEL>
+                  {gelLoading
+                    ? "₾..."
+                    : `₾${typeof priceGEL === "number" ? priceGEL.toFixed(2) : "0.00"}`}
+                </PriceValueGEL>
               </PriceDetail>
               <PriceDetail>
                 <PriceLabel>Stock</PriceLabel>
-                <PriceValueStock>Stock: {pet.stock}</PriceValueStock>
+                <PriceValueStock>{pet.inStock}</PriceValueStock>
               </PriceDetail>
             </PetDetailPrices>
 
-            {pet.isPopular && <PetDetailBadge>Popular</PetDetailBadge>}
+            {pet.popular && <PetDetailBadge>Popular</PetDetailBadge>}
           </PetDetailInfo>
         </PetDetailHeader>
 
         <PetDetailSection>
-          <PetDetailDescription>{pet.description}</PetDetailDescription>
+          <PetDetailSectionH3>Description</PetDetailSectionH3>
+          <PetDetailDescriptionWrapper>
+            <PetDetailDescriptionP>{pet.description}</PetDetailDescriptionP>
+          </PetDetailDescriptionWrapper>
         </PetDetailSection>
-      </PetDetail>
 
-      <Actions></Actions>
-    </Wrapper>
+        <Actions>
+          <EditButton onClick={() => navigation(`/edit-pet/${pet.id}`)}>
+            Edit Pet
+          </EditButton>
+          <DeleteButton
+            onClick={() => alert("Delete functionality not implemented")}
+          >
+            Delete Pet
+          </DeleteButton>
+        </Actions>
+      </PetDetail>
+    </>
   );
 };
 

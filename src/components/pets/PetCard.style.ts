@@ -18,7 +18,7 @@ export const Card = styled.div`
   }
 `;
 
-export const Image = styled.div`
+export const ImageDiv = styled.div`
   width: 100%;
   height: 220px;
   background: #edf2f7;
@@ -29,6 +29,11 @@ export const Image = styled.div`
   justify-content: center;
   color: #4a5568;
   font-size: 3.5rem;
+`;
+
+export const Image = styled.img`
+  width: 100%;
+  height: 230px;
 `;
 
 export const Name = styled.h3`
@@ -52,19 +57,16 @@ export const Category = styled.p`
 
 export const Price = styled.div`
   display: flex;
-  justify-content: space-between;
-  font-weight: 500;
-  margin-bottom: 10px;
+  gap: 20px;
+  margin-bottom: 16px;
 `;
 
 export const PriceItemUSD = styled.div`
   color: #38a169;
-  color: #4a6fa5;
 `;
 
 export const PriceItemGEL = styled.div`
   color: #c53030;
-  color: #4a6fa5;
 `;
 
 export const Description = styled.div`
