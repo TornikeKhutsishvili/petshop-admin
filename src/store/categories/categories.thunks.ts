@@ -52,12 +52,12 @@ export const addCategory = createAsyncThunk<
 /** UPDATE CATEGORY */
 export const updateCategory = createAsyncThunk<
   categoriesList,
-  { id: number; category: categoriesList },
+  { id: string; category: categoriesList },
   { rejectValue: string }
 >("categories/updateCategory", async ({ id, category }, thunkAPI) => {
   try {
     const res = await fetch(`${BASE_URL}/${id}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(category),
     });
@@ -77,8 +77,8 @@ export const updateCategory = createAsyncThunk<
 
 /** DELETE CATEGORY */
 export const deleteCategory = createAsyncThunk<
-  number,
-  number,
+  string,
+  string,
   { rejectValue: string }
 >("categories/deleteCategory", async (id, thunkAPI) => {
   try {

@@ -52,12 +52,12 @@ export const addAnimal = createAsyncThunk<
 /** UPDATE ANIMAL */
 export const updateAnimal = createAsyncThunk<
   animalsList,
-  { id: number; animal: animalsList },
+  { id: string; animal: animalsList },
   { rejectValue: string }
 >("animals/updateAnimal", async ({ id, animal }, thunkAPI) => {
   try {
     const res = await fetch(`${BASE_URL}/${id}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(animal),
     });
@@ -77,8 +77,8 @@ export const updateAnimal = createAsyncThunk<
 
 /** DELETE ANIMAL */
 export const deleteAnimal = createAsyncThunk<
-  number,
-  number,
+  string,
+  string,
   { rejectValue: string }
 >("animals/deleteAnimal", async (id, thunkAPI) => {
   try {

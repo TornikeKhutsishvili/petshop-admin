@@ -95,6 +95,16 @@
       "description": "Max is a beautiful Husky with stunning blue eyes. He loves to run and is very loyal.",
       "inStock": 10,
       "popular": false
+    },
+    {
+      "id": 9,
+      "name": "Birdabe",
+      "species": "Unknown",
+      "price": 450,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4dbCwIwhQomEhhv72AeVtuYmwWk9u3nUtJXaSw-r8Mx8DAgrjiql6ykr9JS4cK-8UtEQ8iwLNNQekONiro-vDSfjNVlDxSZjk5DvUg30&s=10",
+      "description": "This is beautiful australian bird",
+      "inStock": 4,
+      "popular": true
     }
   ],
   "categories": [
@@ -132,7 +142,7 @@
     },
     {
       "id": "3",
-      "animal_id": [3, 5, 7],
+      "animal_id": [3, 5, 7, 9],
       "category_id": 3
     },
     {

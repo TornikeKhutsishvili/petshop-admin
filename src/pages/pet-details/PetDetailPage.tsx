@@ -2,6 +2,10 @@ import React from "react";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+import type { animalsList } from "../../interfaces/animals.interface";
+import type { categoriesList } from "../../interfaces/categories.interface";
+import type { animals_with_categoriesList } from "../../interfaces/animals_with_categories.interface";
+
 // Styles
 import {
   Wrapper,
@@ -41,22 +45,54 @@ import { categoriesListSelector } from "../../store/categories/categories.slice"
 import { animalsWithCategoriesListSelector } from "../../store/animals_with_categories/animals_with_categories.slice";
 import type { AppDispatch } from "../../store";
 import { useCurrencyConverter } from "../../hooks/useCurrencyConverter";
-import { delete_animal_with_category } from "../../store/animals_with_categories/animals_with_categories.thunks";
+import {
+  get_animals_with_categories,
+  update_animal_with_category,
+} from "../../store/animals_with_categories/animals_with_categories.thunks";
 
 const PetDetailPage: React.FC = () => {
   const navigation = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams<{ id: string }>();
 
+  useEffect(() => {
+    dispatch(getAnimals());
+    dispatch(getCategories());
+    dispatch(get_animals_with_categories());
+  }, [dispatch]);
+
   const pets = useSelector(animalsListSelector);
   const categories = useSelector(categoriesListSelector);
   const animalCategories = useSelector(animalsWithCategoriesListSelector);
   const loading = useSelector(animalsLoadingSelector);
 
+  const petId = id;
+  const pet = pets.find((p: animalsList) => String(p.id) === petId);
+
   const deletePet = async (petId: number) => {
     try {
-      await dispatch(deleteAnimal(petId)).unwrap();
-      await dispatch(delete_animal_with_category(petId)).unwrap();
+      const petIdStr = String(petId);
+
+      const relation = animalCategories.find((r) =>
+        r.animal_id.includes(petId),
+      );
+
+      if (relation) {
+        const updatedRelation = {
+          ...relation,
+          animal_id: relation.animal_id.filter((id) => id !== petId),
+        };
+
+        await dispatch(
+          update_animal_with_category({
+            id: relation.id,
+            category: updatedRelation,
+          }),
+        ).unwrap();
+      }
+
+      await dispatch(deleteAnimal(petIdStr)).unwrap();
+
       navigation("/pets");
     } catch (err) {
       console.error("Failed to delete pet", err);
@@ -64,19 +100,15 @@ const PetDetailPage: React.FC = () => {
   };
 
   const getCategoryByAnimal = (animalId: number) => {
-    const relation = animalCategories.find((r) =>
+    const relation = animalCategories.find((r: animals_with_categoriesList) =>
       r.animal_id.includes(animalId),
     );
-    return categories.find((c) => c.id === relation?.category_id);
+
+    return categories.find(
+      (c: categoriesList) => c.id === relation?.category_id,
+    );
   };
 
-  useEffect(() => {
-    dispatch(getAnimals());
-    dispatch(getCategories());
-  }, [dispatch]);
-
-  const petId = id;
-  const pet = pets.find((p) => String(p.id) === petId);
   const category = pet ? getCategoryByAnimal(pet.id) : null;
 
   const { converted: priceGEL, loading: gelLoading } = useCurrencyConverter(

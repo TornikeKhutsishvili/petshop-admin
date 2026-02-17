@@ -88,8 +88,8 @@ export const update_animal_with_category = createAsyncThunk<
 
 /** DELETE ANIMAL WITH CATEGORY */
 export const delete_animal_with_category = createAsyncThunk<
-  number,
-  number,
+  string,
+  string,
   { rejectValue: string }
 >(
   "animals_with_categories/delete_animal_with_category",
