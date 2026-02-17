@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { categoriesListSelector } from "../../store/categories/categories.slice";
 import { updateCategory } from "../../store/categories/categories.thunks";
+import type { AppDispatch } from "../../store";
 import {
   Container,
   Form,
@@ -17,26 +18,39 @@ const EditCategoryPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const categoryId = Number(id);
 
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
   const categories = useSelector(categoriesListSelector);
   const category = categories.find((c) => c.id === categoryId);
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [title, setTitle] = useState(category?.title || "");
   const [description, setDescription] = useState(category?.description || "");
 
-  if (!category) return <Container>Category not found</Container>;
+  if (!category) {
+    return <Container>Category not found</Container>;
+  }
 
-  const handleSave = async () => {
-    await dispatch(
-      updateCategory({
-        id: categoryId,
-        category: { ...category, title, description },
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      }) as any,
-    );
-    navigate("/categories");
+  const handleSave = async (e: React.SubmitEvent) => {
+    e.preventDefault();
+
+    try {
+      await dispatch(
+        updateCategory({
+          id: categoryId,
+          category: {
+            ...category,
+            title,
+            description,
+          },
+        }),
+      ).unwrap();
+
+      navigate("/categories");
+    } catch (err) {
+      console.error("Update failed", err);
+      alert("Failed to update category. Check console for details.");
+    }
   };
 
   const handleCancel = () => navigate("/categories");
@@ -44,9 +58,14 @@ const EditCategoryPage: React.FC = () => {
   return (
     <Container>
       <h2>Edit Category</h2>
-      <Form>
+
+      <Form key={category.id} onSubmit={handleSave}>
         <label>Title</label>
-        <Input value={title} onChange={(e) => setTitle(e.target.value)} />
+        <Input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
 
         <label>Description</label>
         <TextArea
@@ -55,8 +74,8 @@ const EditCategoryPage: React.FC = () => {
         />
 
         <ButtonGroup>
-          <Button onClick={handleSave}>Save</Button>
-          <Button variant="secondary" onClick={handleCancel}>
+          <Button type="submit">Save</Button>
+          <Button type="button" variant="secondary" onClick={handleCancel}>
             Cancel
           </Button>
         </ButtonGroup>

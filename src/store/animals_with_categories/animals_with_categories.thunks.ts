@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { animals_with_categoriesList } from "../../interfaces/animals_with_categories.interface";
 
-const BASE_URL = "http://localhost:4003/animals_with_categories";
+const BASE_URL = `http://localhost:4003/animals_with_categories`;
 
 // GET
 export const get_animals_with_categories = createAsyncThunk<
@@ -26,7 +26,7 @@ export const get_animals_with_categories = createAsyncThunk<
 // ADD
 export const add_animal_with_category = createAsyncThunk<
   animals_with_categoriesList,
-  Omit<animals_with_categoriesList, "id">,
+  { id: number; category: animals_with_categoriesList },
   { rejectValue: string }
 >(
   "animals_with_categories/add_animal_with_category",
@@ -54,7 +54,7 @@ export const update_animal_with_category = createAsyncThunk<
   async ({ id, category }, thunkAPI) => {
     try {
       const res = await fetch(`${BASE_URL}/${id}`, {
-        method: "PUT",
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(category),
       });

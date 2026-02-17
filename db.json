@@ -97,7 +97,6 @@
       "popular": false
     }
   ],
-
   "categories": [
     {
       "id": 1,
@@ -120,7 +119,6 @@
       "description": "Peaceful aquatic companions for relaxation"
     }
   ],
-
   "animals_with_categories": [
     {
       "id": 1,

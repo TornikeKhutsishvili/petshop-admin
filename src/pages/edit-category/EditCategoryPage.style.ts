@@ -6,7 +6,7 @@ export const Container = styled.div`
   padding: 40px 20px;
 `;
 
-export const Form = styled.div`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 16px;

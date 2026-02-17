@@ -21,7 +21,7 @@ export const getCategories = createAsyncThunk<
 // ADD
 export const addCategory = createAsyncThunk<
   categoriesList,
-  Omit<categoriesList, "id">,
+  categoriesList,
   { rejectValue: string }
 >("categories/addCategory", async (category, thunkAPI) => {
   try {
