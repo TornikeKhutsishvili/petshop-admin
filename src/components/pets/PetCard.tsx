@@ -1,4 +1,6 @@
-import type React from "react";
+import React from "react";
+import type { animalsList } from "../../interfaces/animals.interface";
+import type { categoriesList } from "../../interfaces/categories.interface";
 import {
   Card,
   ImageDiv,
@@ -13,8 +15,6 @@ import {
   Badge,
   Stock,
 } from "./PetCard.style";
-import type { animalsList } from "../../interfaces/animals.interface";
-import type { categoriesList } from "../../interfaces/categories.interface";
 import { useCurrencyConverter } from "../../hooks/useCurrencyConverter";
 
 interface Props {
@@ -41,14 +41,9 @@ const PetCard: React.FC<Props> = ({ pet, category, onClick }) => {
       <Category>{category?.title || "No Category"}</Category>
 
       <Price>
-        <PriceItemUSD>
-          ${typeof pet.price === "number" ? pet.price.toFixed(2) : "0.00"}
-        </PriceItemUSD>
-
+        <PriceItemUSD>${pet.price.toFixed(2)}</PriceItemUSD>
         <PriceItemGEL>
-          {gelLoading
-            ? "₾..."
-            : `₾${typeof priceGEL === "number" ? priceGEL.toFixed(2) : "0.00"}`}
+          {gelLoading ? "₾..." : `₾${priceGEL?.toFixed(2) ?? "0.00"}`}
         </PriceItemGEL>
       </Price>
 

@@ -25,7 +25,7 @@ const AddCategoryPage: React.FC = () => {
   const navigate = useNavigate();
   const categories = useSelector(categoriesListSelector);
 
-  const addCategoryHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const addCategoryHandler = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);

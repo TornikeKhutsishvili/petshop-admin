@@ -67,7 +67,7 @@ const PetDetailPage: React.FC = () => {
     const relation = animalCategories.find((r) =>
       r.animal_id.includes(animalId),
     );
-    return categories.find((c) => c.id === relation?.category_id[0]);
+    return categories.find((c) => c.id === relation?.category_id);
   };
 
   useEffect(() => {

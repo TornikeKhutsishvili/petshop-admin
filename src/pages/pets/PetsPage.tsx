@@ -54,9 +54,9 @@ const PetsPage: React.FC = () => {
       r.animal_id.some((id) => String(id) === String(animalId)),
     );
 
-    if (!relation || !relation.category_id?.length) return undefined;
+    if (!relation || !relation.category_id) return undefined;
 
-    const categoryId = String(relation.category_id[0]);
+    const categoryId = String(relation.category_id);
 
     return categories.find((c) => String(c.id) === String(categoryId));
   };

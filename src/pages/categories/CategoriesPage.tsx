@@ -59,11 +59,7 @@ const CategoriesPage: React.FC = () => {
       <Grid>
         {categories.map((category) => {
           const petsCount = animalCategories
-            .filter((relation) =>
-              relation.category_id.some(
-                (id) => String(id) === String(category.id),
-              ),
-            )
+            .filter((relation) => relation.category_id === category.id)
             .reduce((total, relation) => total + relation.animal_id.length, 0);
 
           return (
