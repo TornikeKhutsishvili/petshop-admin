@@ -2,12 +2,9 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
 `;
 
 export const BtnBack = styled.a`
@@ -41,7 +38,7 @@ export const PetDetailHeader = styled.div`
   margin-bottom: 40px;
 `;
 
-export const PetDetailImage = styled.div`
+export const PetDetailImageDiv = styled.div`
   width: 320px;
   height: 320px;
   background: #edf2f7;
@@ -52,6 +49,11 @@ export const PetDetailImage = styled.div`
   color: #4a5568;
   font-size: 5rem;
   flex-shrink: 0;
+`;
+
+export const PetDetailImage = styled.img`
+  width: 320px;
+  height: 320px;
 `;
 
 export const PetDetailInfo = styled.div`
@@ -145,7 +147,7 @@ export const PetDetailDescriptionWrapper = styled.div`
   border: 1px solid #e2e8f0;
 `;
 
-export const PetDetailDescription = styled.p`
+export const PetDetailDescriptionP = styled.p`
   margin: 0;
   line-height: 1.7;
   font-size: 1.05rem;
@@ -171,6 +173,10 @@ export const EditButton = styled.button`
   letter-spacing: 0.01em;
   background: #4a6fa5;
   color: white;
+
+  &:hover {
+    background: #2b5d8c;
+  }
 `;
 
 export const DeleteButton = styled.button`
@@ -187,4 +193,8 @@ export const DeleteButton = styled.button`
   letter-spacing: 0.01em;
   background: #c53030;
   color: white;
+
+  &:hover {
+    background: #e53e3e;
+  }
 `;

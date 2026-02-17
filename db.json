@@ -1,7 +1,7 @@
 {
   "animals": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Rex",
       "species": "Dog",
       "breed": "Corgi",
@@ -13,7 +13,7 @@
       "popular": true
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Mittens",
       "species": "Cat",
       "breed": "British Shorthair",
@@ -25,7 +25,7 @@
       "popular": true
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Polly",
       "species": "Bird",
       "breed": "Parrot",
@@ -37,7 +37,7 @@
       "popular": true
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Buddy",
       "species": "Dog",
       "breed": "Labrador",
@@ -49,7 +49,7 @@
       "popular": false
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Kiwi",
       "species": "Bird",
       "breed": "Kea",
@@ -61,7 +61,7 @@
       "popular": false
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Luna",
       "species": "Cat",
       "breed": "Maine Coon",
@@ -73,7 +73,7 @@
       "popular": false
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Charlie",
       "species": "Bird",
       "breed": "Macaw",
@@ -85,7 +85,7 @@
       "popular": true
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "Max",
       "species": "Dog",
       "breed": "Husky",
@@ -95,37 +95,60 @@
       "description": "Max is a beautiful Husky with stunning blue eyes. He loves to run and is very loyal.",
       "inStock": 10,
       "popular": false
+    },
+    {
+      "id": 9,
+      "name": "Birdabe",
+      "species": "Unknown",
+      "price": 450,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4dbCwIwhQomEhhv72AeVtuYmwWk9u3nUtJXaSw-r8Mx8DAgrjiql6ykr9JS4cK-8UtEQ8iwLNNQekONiro-vDSfjNVlDxSZjk5DvUg30&s=10",
+      "description": "This is beautiful australian bird",
+      "inStock": 4,
+      "popular": true
     }
   ],
-
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Dogs",
       "description": "Loyal and friendly companions perfect for families"
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Cats",
       "description": "Independent and graceful pets with unique personalities"
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Birds",
       "description": "Colorful and melodious friends that brighten any home"
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Fish",
       "description": "Peaceful aquatic companions for relaxation"
     }
   ],
-
   "animals_with_categories": [
     {
-      "id": 1,
+      "id": "1",
+      "animal_id": [1, 4, 8],
+      "category_id": 1
+    },
+    {
+      "id": "2",
+      "animal_id": [2, 6],
+      "category_id": 2
+    },
+    {
+      "id": "3",
+      "animal_id": [3, 5, 7, 9],
+      "category_id": 3
+    },
+    {
+      "id": "4",
       "animal_id": [],
-      "category_id": []
+      "category_id": 4
     }
   ]
 }
