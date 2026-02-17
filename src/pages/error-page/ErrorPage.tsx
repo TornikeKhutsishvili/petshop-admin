@@ -1,3 +1,4 @@
+import type React from "react";
 import {
   ErrorPageWrapper,
   ErrorCard,
@@ -6,7 +7,7 @@ import {
   BackButton,
 } from "./ErrorPage.styles";
 
-const ErrorPage = () => {
+const ErrorPage: React.FC = () => {
   return (
     <>
       <ErrorPageWrapper>

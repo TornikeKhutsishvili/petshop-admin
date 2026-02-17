@@ -9,7 +9,7 @@
       "price": 750,
       "image": "https://public.youware.com/users-website-assets/prod/55af410a-7dc1-4447-a202-a350246925d1/g79fc0d4f011eca1a2a3f94b402f472a9ba623659229ad1cdc4d22d8b08b22ca424a7ec5ec4202a2c08a90a7844ece89693ff7caedc2988199e51ba0ccba60728_640.jpg",
       "description": "Rex is a playful Corgi who loves to run and play fetch. He is great with children and other pets.",
-      "inStock": true,
+      "inStock": 3,
       "popular": true
     },
     {
@@ -21,7 +21,7 @@
       "price": 500,
       "image": "https://public.youware.com/users-website-assets/prod/55af410a-7dc1-4447-a202-a350246925d1/g8bcb38e9a8af3bca25ebc4768e7ed4bcfece9ce9b36f15b5faaffe12b265383f0f864abcd3b40ec0439a836fe1f9ce1ba357bf2f8f53ea3291f608cc8dfd8b29_640.jpg",
       "description": "Mittens is a gentle and affectionate British Shorthair. She loves to cuddle and play with toys.",
-      "inStock": true,
+      "inStock": 2,
       "popular": true
     },
     {
@@ -33,7 +33,7 @@
       "price": 300,
       "image": "https://public.youware.com/users-website-assets/prod/55af410a-7dc1-4447-a202-a350246925d1/g18578530a6c6317bd6bbb1c2d1a79940fd01d1cf4f2e5c3466c55ff014445eab1a94bfb279a66d1cd50dcef50f5be631a694694aa95fcd0c3ce2f2e7626676bd_640.jpg",
       "description": "Polly is a colorful and talkative parrot. She can already say a few words and loves to whistle.",
-      "inStock": false,
+      "inStock": 8,
       "popular": true
     },
     {
@@ -45,7 +45,7 @@
       "price": 850,
       "image": "https://public.youware.com/users-website-assets/prod/55af410a-7dc1-4447-a202-a350246925d1/g609f16458d421ec6d1ed1942ab6b07f8b3ef2fad1c26c003ea7778c8fcc6165e7a733a50a6946382aee5ac087d9604af3c59cd93b35ff7acfb0fa1f571a116be_640.jpg",
       "description": "Buddy is an energetic and friendly Labrador. He loves to swim and play outdoors.",
-      "inStock": true,
+      "inStock": 15,
       "popular": false
     },
     {
@@ -57,7 +57,7 @@
       "price": 450,
       "image": "https://public.youware.com/users-website-assets/prod/55af410a-7dc1-4447-a202-a350246925d1/g6525f0bf2f15495be738f4a2401ec7c91036f0d58f46e9700db76696cfd9de5a89e1dee3745601f75ca544eeed90acb9e54431097a069b02ed1d3736574f6d02_640.jpg",
       "description": "Kiwi is a playful and intelligent Kea parrot. He loves to solve puzzles and interact with people.",
-      "inStock": true,
+      "inStock": 7,
       "popular": false
     },
     {
@@ -69,7 +69,7 @@
       "price": 700,
       "image": "https://public.youware.com/users-website-assets/prod/55af410a-7dc1-4447-a202-a350246925d1/g8bcb38e9a8af3bca25ebc4768e7ed4bcfece9ce9b36f15b5faaffe12b265383f0f864abcd3b40ec0439a836fe1f9ce1ba357bf2f8f53ea3291f608cc8dfd8b29_640.jpg",
       "description": "Luna is a gentle giant with a beautiful coat. She is calm and loves to be brushed.",
-      "inStock": false,
+      "inStock": 4,
       "popular": false
     },
     {
@@ -81,7 +81,7 @@
       "price": 1200,
       "image": "https://public.youware.com/users-website-assets/prod/55af410a-7dc1-4447-a202-a350246925d1/gc5fb13e591c7c3ba012eef1c19cd4d92a735963d98c052e2ad86e531a869d9ab450a75548c091b61204ace699ed85f57adc898a426ef45206c8e2f0180aafab8_640.jpg",
       "description": "Charlie is a stunning Macaw with vibrant colors. He can speak many phrases and is very sociable.",
-      "inStock": true,
+      "inStock": 11,
       "popular": true
     },
     {
@@ -93,10 +93,39 @@
       "price": 950,
       "image": "https://public.youware.com/users-website-assets/prod/55af410a-7dc1-4447-a202-a350246925d1/g79fc0d4f011eca1a2a3f94b402f472a9ba623659229ad1cdc4d22d8b08b22ca424a7ec5ec4202a2c08a90a7844ece89693ff7caedc2988199e51ba0ccba60728_640.jpg",
       "description": "Max is a beautiful Husky with stunning blue eyes. He loves to run and is very loyal.",
-      "inStock": true,
+      "inStock": 10,
       "popular": false
     }
   ],
-  "categories": [],
-  "animals_with_categories": []
+
+  "categories": [
+    {
+      "id": 1,
+      "title": "Dogs",
+      "description": "Loyal and friendly companions perfect for families"
+    },
+    {
+      "id": 2,
+      "title": "Cats",
+      "description": "Independent and graceful pets with unique personalities"
+    },
+    {
+      "id": 3,
+      "title": "Birds",
+      "description": "Colorful and melodious friends that brighten any home"
+    },
+    {
+      "id": 4,
+      "title": "Fish",
+      "description": "Peaceful aquatic companions for relaxation"
+    }
+  ],
+
+  "animals_with_categories": [
+    {
+      "id": 1,
+      "animal_id": [],
+      "category_id": []
+    }
+  ]
 }

@@ -30,7 +30,7 @@ const categoriesSlice = createSlice({
     builder
       // GET
       .addCase(getCategories.pending, (state) => {
-        state.loading;
+        state.loading = true;
       })
       .addCase(getCategories.fulfilled, (state, action) => {
         state.loading = false;
@@ -44,7 +44,7 @@ const categoriesSlice = createSlice({
 
       // ADD
       .addCase(addCategory.pending, (state) => {
-        state.loading;
+        state.loading = true;
       })
       .addCase(addCategory.fulfilled, (state, action) => {
         state.categoriesList.push(action.payload);
@@ -56,7 +56,7 @@ const categoriesSlice = createSlice({
 
       // UPDATE
       .addCase(updateCategory.pending, (state) => {
-        state.loading;
+        state.loading = true;
       })
       .addCase(updateCategory.fulfilled, (state, action) => {
         const index = state.categoriesList.findIndex(
@@ -71,7 +71,7 @@ const categoriesSlice = createSlice({
 
       // DELETE
       .addCase(deleteCategory.pending, (state) => {
-        state.loading;
+        state.loading = true;
       })
       .addCase(deleteCategory.fulfilled, (state, action) => {
         state.categoriesList = state.categoriesList.filter(
