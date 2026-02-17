@@ -16,7 +16,10 @@ import {
 } from "./CategoriesPage.style";
 import type { AppDispatch } from "../../store";
 import { useEffect } from "react";
-import { getCategories } from "../../store/categories/categories.thunks";
+import {
+  deleteCategory,
+  getCategories,
+} from "../../store/categories/categories.thunks";
 import { getAnimals } from "../../store/animals/animals.thunks";
 import { animalsWithCategoriesListSelector } from "../../store/animals_with_categories/animals_with_categories.slice";
 import { get_animals_with_categories } from "../../store/animals_with_categories/animals_with_categories.thunks";
@@ -40,8 +43,19 @@ const CategoriesPage: React.FC = () => {
     navigation(`/edit-category/${id}`);
   };
 
-  const handleDeleteCategory = (id: number) => {
-    console.log("Delete category", id);
+  const handleDeleteCategory = async (id: number) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this category?",
+    );
+    if (!confirmDelete) return;
+
+    try {
+      await dispatch(deleteCategory(id)).unwrap();
+      alert("Category deleted successfully!");
+    } catch (err) {
+      console.error("Failed to delete category:", err);
+      alert("Failed to delete category. Check console for details.");
+    }
   };
 
   if (loading) return <Container>Loading categories...</Container>;
@@ -59,7 +73,7 @@ const CategoriesPage: React.FC = () => {
       <Grid>
         {categories.map((category) => {
           const petsCount = animalCategories
-            .filter((relation) => relation.category_id === category.id)
+            .filter((relation) => relation.category_id === Number(category.id))
             .reduce((total, relation) => total + relation.animal_id.length, 0);
 
           return (

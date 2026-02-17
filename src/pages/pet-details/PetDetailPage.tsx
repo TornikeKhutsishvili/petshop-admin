@@ -75,8 +75,8 @@ const PetDetailPage: React.FC = () => {
     dispatch(getCategories());
   }, [dispatch]);
 
-  const petId = Number(id);
-  const pet = pets.find((p) => p.id === petId);
+  const petId = id;
+  const pet = pets.find((p) => String(p.id) === petId);
   const category = pet ? getCategoryByAnimal(pet.id) : null;
 
   const { converted: priceGEL, loading: gelLoading } = useCurrencyConverter(
