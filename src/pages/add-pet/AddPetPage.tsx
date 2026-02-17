@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch } from "../../store";
@@ -23,11 +23,15 @@ import {
 import { categoriesListSelector } from "../../store/categories/categories.slice";
 import { animalsListSelector } from "../../store/animals/animals.slice";
 import { animalsWithCategoriesListSelector } from "../../store/animals_with_categories/animals_with_categories.slice";
-import { addAnimal } from "../../store/animals/animals.thunks";
-import { update_animal_with_category } from "../../store/animals_with_categories/animals_with_categories.thunks";
+import { addAnimal, getAnimals } from "../../store/animals/animals.thunks";
+import {
+  get_animals_with_categories,
+  update_animal_with_category,
+} from "../../store/animals_with_categories/animals_with_categories.thunks";
 import type { animalsList } from "../../interfaces/animals.interface";
 import type { categoriesList } from "../../interfaces/categories.interface";
 import type { animals_with_categoriesList } from "../../interfaces/animals_with_categories.interface";
+import { getCategories } from "../../store/categories/categories.thunks";
 
 const AddPetPage: React.FC = () => {
   const navigate = useNavigate();
@@ -37,7 +41,13 @@ const AddPetPage: React.FC = () => {
   const animals = useSelector(animalsListSelector);
   const animalsWithCategories = useSelector(animalsWithCategoriesListSelector);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    dispatch(getCategories());
+    dispatch(getAnimals());
+    dispatch(get_animals_with_categories());
+  }, [dispatch]);
+
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const elements = form.elements as typeof form.elements & {
@@ -73,9 +83,11 @@ const AddPetPage: React.FC = () => {
       const addedPet = await dispatch(addAnimal(newPet)).unwrap();
 
       const categoryId = Number(elements.category.value);
+      console.log("categoryId", categoryId);
       const existingCategory = animalsWithCategories.find(
         (awc) => awc.category_id === categoryId,
       );
+      console.log("existingCategory", existingCategory);
 
       if (existingCategory) {
         const updatedCategory: animals_with_categoriesList = {
@@ -83,7 +95,9 @@ const AddPetPage: React.FC = () => {
           animal_id: Array.from(
             new Set([...existingCategory.animal_id, addedPet.id]),
           ),
+          category_id: existingCategory.category_id,
         };
+        console.log("updatedCategory", updatedCategory);
 
         await dispatch(
           update_animal_with_category({
@@ -91,6 +105,8 @@ const AddPetPage: React.FC = () => {
             category: updatedCategory,
           }),
         ).unwrap();
+      } else {
+        console.error("No existing category found for id:", categoryId);
       }
 
       navigate("/pets");
