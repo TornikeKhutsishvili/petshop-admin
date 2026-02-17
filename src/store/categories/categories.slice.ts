@@ -10,13 +10,13 @@ import {
 
 type TypeError = string | null;
 
-interface Icategories {
+interface ICategoriesState {
   categoriesList: categoriesList[];
   loading: boolean;
   error: TypeError;
 }
 
-const initialState: Icategories = {
+const initialState: ICategoriesState = {
   categoriesList: [],
   loading: false,
   error: null,
@@ -28,65 +28,78 @@ const categoriesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // GET
+      /** GET CATEGORIES */
       .addCase(getCategories.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(getCategories.fulfilled, (state, action) => {
+        state.categoriesList = action.payload;
         state.loading = false;
         state.error = null;
-        state.categoriesList = action.payload;
       })
       .addCase(getCategories.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        state.error = action.payload ?? "Failed to fetch categories";
       })
 
-      // ADD
+      /** ADD CATEGORY */
       .addCase(addCategory.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(addCategory.fulfilled, (state, action) => {
         state.categoriesList.push(action.payload);
+        state.loading = false;
+        state.error = null;
       })
       .addCase(addCategory.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        state.error = action.payload ?? "Failed to add category";
       })
 
-      // UPDATE
+      /** UPDATE CATEGORY */
       .addCase(updateCategory.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(updateCategory.fulfilled, (state, action) => {
         const index = state.categoriesList.findIndex(
-          (u) => u.id === action.payload.id,
+          (u) => u.id === Number(action.payload.id),
         );
-        if (index !== -1) state.categoriesList[index] = action.payload;
+        if (index !== -1) {
+          state.categoriesList[index] = action.payload;
+        }
+        state.loading = false;
+        state.error = null;
       })
       .addCase(updateCategory.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        state.error = action.payload ?? "Failed to update category";
       })
 
-      // DELETE
+      /** DELETE CATEGORY */
       .addCase(deleteCategory.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(deleteCategory.fulfilled, (state, action) => {
         state.categoriesList = state.categoriesList.filter(
-          (u) => u.id !== action.payload,
+          (u) => u.id !== Number(action.payload),
         );
+        state.loading = false;
+        state.error = null;
       })
       .addCase(deleteCategory.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        state.error = action.payload ?? "Failed to delete category";
       });
   },
 });
 
 export default categoriesSlice.reducer;
 
+/** SELECTORS */
 export const categoriesStateSelector = (state: RootState) => state.categories;
 
 export const categoriesListSelector = createSelector(

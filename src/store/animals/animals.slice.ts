@@ -10,13 +10,13 @@ import {
 
 type TypeError = string | null;
 
-interface Ianimals {
+interface IAnimalsState {
   animalsList: animalsList[];
   loading: boolean;
   error: TypeError;
 }
 
-const initialState: Ianimals = {
+const initialState: IAnimalsState = {
   animalsList: [],
   loading: false,
   error: null,
@@ -28,65 +28,78 @@ const animalsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // GET
+      /** GET ANIMALS */
       .addCase(getAnimals.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(getAnimals.fulfilled, (state, action) => {
+        state.animalsList = action.payload;
         state.loading = false;
         state.error = null;
-        state.animalsList = action.payload;
       })
       .addCase(getAnimals.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        state.error = action.payload ?? "Failed to fetch animals";
       })
 
-      // ADD
+      /** ADD ANIMAL */
       .addCase(addAnimal.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(addAnimal.fulfilled, (state, action) => {
         state.animalsList.push(action.payload);
+        state.loading = false;
+        state.error = null;
       })
       .addCase(addAnimal.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        state.error = action.payload ?? "Failed to add animal";
       })
 
-      // UPDATE
+      /** UPDATE ANIMAL */
       .addCase(updateAnimal.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(updateAnimal.fulfilled, (state, action) => {
         const index = state.animalsList.findIndex(
-          (u) => u.id === action.payload.id,
+          (u) => u.id === Number(action.payload.id),
         );
-        if (index !== -1) state.animalsList[index] = action.payload;
+        if (index !== -1) {
+          state.animalsList[index] = action.payload;
+        }
+        state.loading = false;
+        state.error = null;
       })
       .addCase(updateAnimal.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        state.error = action.payload ?? "Failed to update animal";
       })
 
-      // DELETE
+      /** DELETE ANIMAL */
       .addCase(deleteAnimal.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(deleteAnimal.fulfilled, (state, action) => {
         state.animalsList = state.animalsList.filter(
-          (u) => u.id !== action.payload,
+          (u) => u.id !== Number(action.payload),
         );
+        state.loading = false;
+        state.error = null;
       })
       .addCase(deleteAnimal.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        state.error = action.payload ?? "Failed to delete animal";
       });
   },
 });
 
 export default animalsSlice.reducer;
 
+/** SELECTORS */
 export const animalsStateSelector = (state: RootState) => state.animals;
 
 export const animalsListSelector = createSelector(

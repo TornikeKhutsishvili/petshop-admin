@@ -1,10 +1,12 @@
 export interface animalsList {
   id: number;
   name: string;
-  priceUSD: number;
-  priceGEL: number;
+  species?: string;
+  breed?: string;
+  age?: number;
+  price: number;
   image: string;
   description: string;
-  isPopular: boolean;
-  stock: number;
+  inStock?: number;
+  popular?: boolean;
 }
