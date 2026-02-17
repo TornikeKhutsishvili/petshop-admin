@@ -1,6 +1,4 @@
 import type React from "react";
-import type { animalsList } from "../../interfaces/animals.interface";
-import type { categoriesList } from "../../interfaces/categories.interface";
 import {
   Card,
   ImageDiv,
@@ -15,6 +13,8 @@ import {
   Badge,
   Stock,
 } from "./PetCard.style";
+import type { animalsList } from "../../interfaces/animals.interface";
+import type { categoriesList } from "../../interfaces/categories.interface";
 import { useCurrencyConverter } from "../../hooks/useCurrencyConverter";
 
 interface Props {

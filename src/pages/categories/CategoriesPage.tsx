@@ -37,13 +37,11 @@ const CategoriesPage: React.FC = () => {
   }, [dispatch]);
 
   const handleEditCategory = (id: number) => {
-    console.log("Edit category", id);
     navigation(`/edit-category/${id}`);
   };
 
   const handleDeleteCategory = (id: number) => {
     console.log("Delete category", id);
-    // აქ შეგიძლია გამოიძახო delete thunk
   };
 
   if (loading) return <Container>Loading categories...</Container>;
@@ -61,7 +59,11 @@ const CategoriesPage: React.FC = () => {
       <Grid>
         {categories.map((category) => {
           const petsCount = animalCategories
-            .filter((relation) => relation.category_id.includes(category.id))
+            .filter((relation) =>
+              relation.category_id.some(
+                (id) => String(id) === String(category.id),
+              ),
+            )
             .reduce((total, relation) => total + relation.animal_id.length, 0);
 
           return (
