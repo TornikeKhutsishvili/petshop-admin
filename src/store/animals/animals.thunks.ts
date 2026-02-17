@@ -3,7 +3,7 @@ import type { animalsList } from "../../interfaces/animals.interface";
 
 const BASE_URL = "http://localhost:4003/animals";
 
-// GET
+/** GET ANIMALS */
 export const getAnimals = createAsyncThunk<
   animalsList[],
   void,
@@ -11,14 +11,19 @@ export const getAnimals = createAsyncThunk<
 >("animals/getAnimals", async (_, thunkAPI) => {
   try {
     const res = await fetch(BASE_URL);
-    if (!res.ok) throw new Error();
-    return await res.json();
+    if (!res.ok) {
+      return thunkAPI.rejectWithValue(
+        `Failed to fetch animals: ${res.status} ${res.statusText}`,
+      );
+    }
+    const data: animalsList[] = await res.json();
+    return data;
   } catch {
     return thunkAPI.rejectWithValue("Failed to fetch animals");
   }
 });
 
-// ADD
+/** ADD ANIMAL */
 export const addAnimal = createAsyncThunk<
   animalsList,
   Omit<animalsList, "id">,
@@ -30,13 +35,21 @@ export const addAnimal = createAsyncThunk<
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(animal),
     });
-    return await res.json();
+
+    if (!res.ok) {
+      return thunkAPI.rejectWithValue(
+        `Failed to add animal: ${res.status} ${res.statusText}`,
+      );
+    }
+
+    const data: animalsList = await res.json();
+    return data;
   } catch {
     return thunkAPI.rejectWithValue("Failed to add animal");
   }
 });
 
-// UPDATE
+/** UPDATE ANIMAL */
 export const updateAnimal = createAsyncThunk<
   animalsList,
   { id: number; animal: animalsList },
@@ -48,20 +61,33 @@ export const updateAnimal = createAsyncThunk<
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(animal),
     });
-    return await res.json();
+
+    if (!res.ok) {
+      return thunkAPI.rejectWithValue(
+        `Failed to update animal: ${res.status} ${res.statusText}`,
+      );
+    }
+
+    const data: animalsList = await res.json();
+    return data;
   } catch {
     return thunkAPI.rejectWithValue("Failed to update animal");
   }
 });
 
-// DELETE
+/** DELETE ANIMAL */
 export const deleteAnimal = createAsyncThunk<
   number,
   number,
   { rejectValue: string }
 >("animals/deleteAnimal", async (id, thunkAPI) => {
   try {
-    await fetch(`${BASE_URL}/${id}`, { method: "DELETE" });
+    const res = await fetch(`${BASE_URL}/${id}`, { method: "DELETE" });
+    if (!res.ok) {
+      return thunkAPI.rejectWithValue(
+        `Failed to delete animal: ${res.status} ${res.statusText}`,
+      );
+    }
     return id;
   } catch {
     return thunkAPI.rejectWithValue("Failed to delete animal");

@@ -35,12 +35,13 @@ import {
   animalsListSelector,
   animalsLoadingSelector,
 } from "../../store/animals/animals.slice";
-import { getAnimals } from "../../store/animals/animals.thunks";
+import { deleteAnimal, getAnimals } from "../../store/animals/animals.thunks";
 import { getCategories } from "../../store/categories/categories.thunks";
 import { categoriesListSelector } from "../../store/categories/categories.slice";
 import { animalsWithCategoriesListSelector } from "../../store/animals_with_categories/animals_with_categories.slice";
 import type { AppDispatch } from "../../store";
 import { useCurrencyConverter } from "../../hooks/useCurrencyConverter";
+import { delete_animal_with_category } from "../../store/animals_with_categories/animals_with_categories.thunks";
 
 const PetDetailPage: React.FC = () => {
   const navigation = useNavigate();
@@ -51,6 +52,16 @@ const PetDetailPage: React.FC = () => {
   const categories = useSelector(categoriesListSelector);
   const animalCategories = useSelector(animalsWithCategoriesListSelector);
   const loading = useSelector(animalsLoadingSelector);
+
+  const deletePet = async (petId: number) => {
+    try {
+      await dispatch(deleteAnimal(petId)).unwrap();
+      await dispatch(delete_animal_with_category(petId)).unwrap();
+      navigation("/pets");
+    } catch (err) {
+      console.error("Failed to delete pet", err);
+    }
+  };
 
   const getCategoryByAnimal = (animalId: number) => {
     const relation = animalCategories.find((r) =>
@@ -132,9 +143,7 @@ const PetDetailPage: React.FC = () => {
           <EditButton onClick={() => navigation(`/edit-pet/${pet.id}`)}>
             Edit Pet
           </EditButton>
-          <DeleteButton
-            onClick={() => alert("Delete functionality not implemented")}
-          >
+          <DeleteButton onClick={() => deletePet(pet.id)}>
             Delete Pet
           </DeleteButton>
         </Actions>
