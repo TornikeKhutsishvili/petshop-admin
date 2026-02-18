@@ -61,15 +61,15 @@ const AddPetPage: React.FC = () => {
     };
 
     const nextId = animals.length
-      ? Math.max(...animals.map((a) => a.id)) + 1
+      ? Math.max(...animals.map((a) => a.uuid)) + 1
       : 1;
 
     const selectedCategory = categories.find(
-      (c: categoriesList) => c.id === Number(elements.category.value),
+      (c: categoriesList) => c.uuid === Number(elements.category.value),
     );
 
     const newPet: animalsList = {
-      id: nextId,
+      uuid: nextId,
       name: elements.name.value.trim(),
       species: selectedCategory?.title || "Unknown",
       price: Number(elements.priceUSD.value),
@@ -93,7 +93,7 @@ const AddPetPage: React.FC = () => {
         const updatedCategory: animals_with_categoriesList = {
           ...existingCategory,
           animal_id: Array.from(
-            new Set([...existingCategory.animal_id, addedPet.id]),
+            new Set([...existingCategory.animal_id, addedPet.uuid]),
           ),
           category_id: existingCategory.category_id,
         };
@@ -101,7 +101,7 @@ const AddPetPage: React.FC = () => {
 
         await dispatch(
           update_animal_with_category({
-            id: existingCategory.id,
+            uuid: existingCategory.uuid,
             category: updatedCategory,
           }),
         ).unwrap();
@@ -136,7 +136,7 @@ const AddPetPage: React.FC = () => {
             <FormSelect name="category" required>
               <Option value="">Select Category</Option>
               {categories.map((c) => (
-                <Option key={c.id} value={c.id}>
+                <Option key={c.uuid} value={c.uuid}>
                   {c.title}
                 </Option>
               ))}

@@ -1,8 +1,8 @@
 {
   "animals": [
     {
-      "id": "1",
       "name": "Rex",
+      "uuid": 1,
       "species": "Dog",
       "breed": "Corgi",
       "age": 2,
@@ -13,8 +13,8 @@
       "popular": true
     },
     {
-      "id": "2",
       "name": "Mittens",
+      "uuid": 2,
       "species": "Cat",
       "breed": "British Shorthair",
       "age": 1,
@@ -25,8 +25,8 @@
       "popular": true
     },
     {
-      "id": "3",
       "name": "Polly",
+      "uuid": 3,
       "species": "Bird",
       "breed": "Parrot",
       "age": 3,
@@ -37,8 +37,8 @@
       "popular": true
     },
     {
-      "id": "4",
       "name": "Buddy",
+      "uuid": 4,
       "species": "Dog",
       "breed": "Labrador",
       "age": 1,
@@ -49,8 +49,8 @@
       "popular": false
     },
     {
-      "id": "5",
       "name": "Kiwi",
+      "uuid": 5,
       "species": "Bird",
       "breed": "Kea",
       "age": 2,
@@ -61,8 +61,8 @@
       "popular": false
     },
     {
-      "id": "6",
       "name": "Luna",
+      "uuid": 6,
       "species": "Cat",
       "breed": "Maine Coon",
       "age": 4,
@@ -73,8 +73,8 @@
       "popular": false
     },
     {
-      "id": "7",
       "name": "Charlie",
+      "uuid": 7,
       "species": "Bird",
       "breed": "Macaw",
       "age": 5,
@@ -85,8 +85,8 @@
       "popular": true
     },
     {
-      "id": "8",
       "name": "Max",
+      "uuid": 8,
       "species": "Dog",
       "breed": "Husky",
       "age": 3,
@@ -97,8 +97,8 @@
       "popular": false
     },
     {
-      "id": 9,
       "name": "Birdabe",
+      "uuid": 9,
       "species": "Unknown",
       "price": 450,
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4dbCwIwhQomEhhv72AeVtuYmwWk9u3nUtJXaSw-r8Mx8DAgrjiql6ykr9JS4cK-8UtEQ8iwLNNQekONiro-vDSfjNVlDxSZjk5DvUg30&s=10",
@@ -109,45 +109,45 @@
   ],
   "categories": [
     {
-      "id": "1",
       "title": "Dogs",
+      "uuid": 1,
       "description": "Loyal and friendly companions perfect for families"
     },
     {
-      "id": "2",
       "title": "Cats",
+      "uuid": 2,
       "description": "Independent and graceful pets with unique personalities"
     },
     {
-      "id": "3",
       "title": "Birds",
+      "uuid": 3,
       "description": "Colorful and melodious friends that brighten any home"
     },
     {
-      "id": "4",
       "title": "Fish",
+      "uuid": 4,
       "description": "Peaceful aquatic companions for relaxation"
     }
   ],
   "animals_with_categories": [
     {
-      "id": "1",
       "animal_id": [1, 4, 8],
+      "uuid": 1,
       "category_id": 1
     },
     {
-      "id": "2",
       "animal_id": [2, 6],
+      "uuid": 2,
       "category_id": 2
     },
     {
-      "id": "3",
       "animal_id": [3, 5, 7, 9],
+      "uuid": 3,
       "category_id": 3
     },
     {
-      "id": "4",
       "animal_id": [],
+      "uuid": 4,
       "category_id": 4
     }
   ]

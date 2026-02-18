@@ -15,14 +15,14 @@ import {
 } from "./EditCategoryPage.style";
 
 const EditCategoryPage: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const categoryId = Number(id);
+  const { uuid } = useParams<{ uuid: string }>();
+  const categoryId = Number(uuid);
 
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const categories = useSelector(categoriesListSelector);
-  const category = categories.find((c) => c.id === categoryId);
+  const category = categories.find((c) => c.uuid === categoryId);
 
   const [title, setTitle] = useState(category?.title || "");
   const [description, setDescription] = useState(category?.description || "");
@@ -37,7 +37,7 @@ const EditCategoryPage: React.FC = () => {
     try {
       await dispatch(
         updateCategory({
-          id: categoryId,
+          uuid: categoryId,
           category: {
             ...category,
             title,
@@ -59,7 +59,7 @@ const EditCategoryPage: React.FC = () => {
     <Container>
       <h2>Edit Category</h2>
 
-      <Form key={category.id} onSubmit={handleSave}>
+      <Form key={category.uuid} onSubmit={handleSave}>
         <label>Title</label>
         <Input
           value={title}

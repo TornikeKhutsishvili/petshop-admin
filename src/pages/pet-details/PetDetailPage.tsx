@@ -53,7 +53,7 @@ import {
 const PetDetailPage: React.FC = () => {
   const navigation = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const { id } = useParams<{ id: string }>();
+  const { uuid } = useParams();
 
   useEffect(() => {
     dispatch(getAnimals());
@@ -66,32 +66,38 @@ const PetDetailPage: React.FC = () => {
   const animalCategories = useSelector(animalsWithCategoriesListSelector);
   const loading = useSelector(animalsLoadingSelector);
 
-  const petId = id;
-  const pet = pets.find((p: animalsList) => String(p.id) === petId);
+  const petId = uuid;
+  const pet = pets.find((p: animalsList) => Number(p.uuid) === Number(petId));
 
   const deletePet = async (petId: number) => {
     try {
-      const petIdStr = String(petId);
+      const existingAnimal = pets.find((a: animalsList) => a.uuid === petId);
+      if (!existingAnimal) {
+        console.warn(`Animal with id ${petId} does not exist`);
+        return;
+      }
 
-      const relation = animalCategories.find((r) =>
+      const relation = animalCategories.find((r: animals_with_categoriesList) =>
         r.animal_id.includes(petId),
       );
-
       if (relation) {
         const updatedRelation = {
           ...relation,
-          animal_id: relation.animal_id.filter((id) => id !== petId),
+          animal_id: relation.animal_id.filter(
+            (uuid: number) => uuid !== petId,
+          ),
         };
 
         await dispatch(
           update_animal_with_category({
-            id: relation.id,
+            uuid: relation.uuid,
             category: updatedRelation,
           }),
         ).unwrap();
       }
 
-      await dispatch(deleteAnimal(petIdStr)).unwrap();
+      // Delete animal
+      await dispatch(deleteAnimal(petId)).unwrap();
 
       navigation("/pets");
     } catch (err) {
@@ -105,11 +111,11 @@ const PetDetailPage: React.FC = () => {
     );
 
     return categories.find(
-      (c: categoriesList) => c.id === relation?.category_id,
+      (c: categoriesList) => c.uuid === relation?.category_id,
     );
   };
 
-  const category = pet ? getCategoryByAnimal(pet.id) : null;
+  const category = pet ? getCategoryByAnimal(pet.uuid) : null;
 
   const { converted: priceGEL, loading: gelLoading } = useCurrencyConverter(
     pet?.price || 0,
@@ -172,10 +178,10 @@ const PetDetailPage: React.FC = () => {
         </PetDetailSection>
 
         <Actions>
-          <EditButton onClick={() => navigation(`/edit-pet/${pet.id}`)}>
+          <EditButton onClick={() => navigation(`/edit-pet/${pet.uuid}`)}>
             Edit Pet
           </EditButton>
-          <DeleteButton onClick={() => deletePet(pet.id)}>
+          <DeleteButton onClick={() => deletePet(pet.uuid)}>
             Delete Pet
           </DeleteButton>
         </Actions>

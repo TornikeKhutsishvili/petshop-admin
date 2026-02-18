@@ -34,13 +34,13 @@ const AddCategoryPage: React.FC = () => {
     const formData = new FormData(e.currentTarget);
 
     const maxId = categories.length
-      ? Math.max(...categories.map((c: categoriesList) => c.id))
+      ? Math.max(...categories.map((c: categoriesList) => c.uuid))
       : 0;
 
     const nextId = maxId + 1;
 
     const newCategory = {
-      id: nextId,
+      uuid: nextId,
       title: formData.get("title") as string,
       description: formData.get("description") as string,
     };
@@ -49,7 +49,7 @@ const AddCategoryPage: React.FC = () => {
       await dispatch(addCategory(newCategory)).unwrap();
 
       const newAWC: animals_with_categoriesList = {
-        id: nextId,
+        uuid: nextId,
         animal_id: [],
         category_id: nextId,
       };

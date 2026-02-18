@@ -14,8 +14,8 @@ interface Props {
   category: categoriesList;
   petsCount?: number;
   onClick: () => void;
-  onEdit?: (id: number) => void;
-  onDelete?: (id: number) => void;
+  onEdit?: (uuid: number) => void;
+  onDelete?: (uuid: number) => void;
 }
 
 const CategoryCard: React.FC<Props> = ({
@@ -27,16 +27,16 @@ const CategoryCard: React.FC<Props> = ({
 }) => {
   const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    onEdit?.(category.id);
+    onEdit?.(category.uuid);
   };
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    onDelete?.(category.id);
+    onDelete?.(category.uuid);
   };
 
   return (
-    <Card key={category.id} onClick={onClick}>
+    <Card key={category.uuid} onClick={onClick}>
       <Title>{category.title}</Title>
       <Description>{category.description}</Description>
 

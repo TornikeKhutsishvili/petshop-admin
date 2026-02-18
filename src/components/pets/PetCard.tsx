@@ -31,7 +31,7 @@ const PetCard: React.FC<Props> = ({ pet, category, onClick }) => {
   );
 
   return (
-    <Card key={pet.id} onClick={onClick}>
+    <Card key={pet.uuid} onClick={onClick}>
       <ImageDiv>
         <Image src={pet.image} alt={pet.name} />
       </ImageDiv>
