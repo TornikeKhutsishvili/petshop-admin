@@ -30,9 +30,10 @@ import { getCategories } from "../../store/categories/categories.thunks";
 import { animalsWithCategoriesListSelector } from "../../store/animals_with_categories/animals_with_categories.slice";
 import type { AppDispatch } from "../../store";
 import { get_animals_with_categories } from "../../store/animals_with_categories/animals_with_categories.thunks";
+import type { animals_with_categoriesList } from "../../interfaces/animals_with_categories.interface";
 
 const PetsPage: React.FC = () => {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
   const pets = useSelector(animalsListSelector);
@@ -50,19 +51,21 @@ const PetsPage: React.FC = () => {
   const getCategoryByAnimal = (
     animalId: number,
   ): categoriesList | undefined => {
-    const relation = animalCategories.find((r) =>
-      r.animal_id.some((uuid) => Number(uuid) === Number(animalId)),
+    const relation = animalCategories.find((r: animals_with_categoriesList) =>
+      r.animal_id.some((uuid: number) => Number(uuid) === Number(animalId)),
     );
 
     if (!relation || !relation.category_id) return undefined;
 
     const categoryId = Number(relation.category_id);
 
-    return categories.find((c) => Number(c.uuid) === Number(categoryId));
+    return categories.find(
+      (c: categoriesList) => Number(c.uuid) === Number(categoryId),
+    );
   };
 
   const onSelectPet = (uuid: number) => {
-    navigation(`/pet-detail/${uuid}`);
+    navigate(`/pet-detail/${uuid}`);
   };
 
   if (loading) return <Container>Loading pets...</Container>;
@@ -73,7 +76,7 @@ const PetsPage: React.FC = () => {
       <Page>
         <ActionBar>
           <Title>All Pets</Title>
-          <Button onClick={() => navigation("/add-pet")}>➕ Add New Pet</Button>
+          <Button onClick={() => navigate("/add-pet")}>➕ Add New Pet</Button>
         </ActionBar>
 
         <CardsGrid>

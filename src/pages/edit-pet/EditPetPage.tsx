@@ -24,7 +24,7 @@ import { useEffect } from "react";
 import type { animalsList } from "../../interfaces/animals.interface";
 
 const EditPetPage: React.FC = () => {
-  const { uuid } = useParams<{ uuid: string }>();
+  const { uuid } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const pets = useSelector(animalsListSelector);
@@ -54,7 +54,9 @@ const EditPetPage: React.FC = () => {
     };
 
     try {
-      await dispatch(updateAnimal({ uuid: pet.uuid, animal: updatedPet })).unwrap();
+      await dispatch(
+        updateAnimal({ uuid: pet.uuid, animal: updatedPet }),
+      ).unwrap();
       navigate("/pets");
     } catch (err) {
       console.error("Failed to update pet:", err);

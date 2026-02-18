@@ -66,7 +66,7 @@ export const update_animal_with_category = createAsyncThunk<
   "animals_with_categories/update_animal_with_category",
   async ({ uuid, category }, thunkAPI) => {
     try {
-      const res = await fetch(`${BASE_URL}?id=${uuid}`, {
+      const res = await fetch(`${BASE_URL}/${uuid}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(category),
@@ -95,7 +95,7 @@ export const delete_animal_with_category = createAsyncThunk<
   "animals_with_categories/delete_animal_with_category",
   async (uuid, thunkAPI) => {
     try {
-      const res = await fetch(`${BASE_URL}?id=${uuid}`, { method: "DELETE" });
+      const res = await fetch(`${BASE_URL}/${uuid}`, { method: "DELETE" });
       if (!res.ok) {
         return thunkAPI.rejectWithValue(
           `Failed to delete animal_with_category: ${res.status} ${res.statusText}`,

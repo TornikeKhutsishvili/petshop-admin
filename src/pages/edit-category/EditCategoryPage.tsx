@@ -15,7 +15,7 @@ import {
 } from "./EditCategoryPage.style";
 
 const EditCategoryPage: React.FC = () => {
-  const { uuid } = useParams<{ uuid: string }>();
+  const { uuid } = useParams();
   const categoryId = Number(uuid);
 
   const dispatch = useDispatch<AppDispatch>();

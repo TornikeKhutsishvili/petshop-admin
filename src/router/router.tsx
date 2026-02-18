@@ -43,15 +43,15 @@ const router: RouteObject[] = [
       // dynamic
       {
         element: <PetDetailPage />,
-        path: "/pets/:id",
+        path: "/pet-detail/:id",
       },
       {
         element: <EditPetPage />,
-        path: "/pets/:id",
+        path: "/pet-edit/:id",
       },
       {
         element: <EditCategoryPage />,
-        path: "/categories/:id",
+        path: "/edit-category/:id",
       },
     ],
   },

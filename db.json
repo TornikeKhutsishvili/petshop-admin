@@ -1,8 +1,9 @@
 {
   "animals": [
     {
-      "name": "Rex",
+      "id": "c6d7",
       "uuid": 1,
+      "name": "Rex",
       "species": "Dog",
       "breed": "Corgi",
       "age": 2,
@@ -13,8 +14,9 @@
       "popular": true
     },
     {
-      "name": "Mittens",
+      "id": "8454",
       "uuid": 2,
+      "name": "Mittens",
       "species": "Cat",
       "breed": "British Shorthair",
       "age": 1,
@@ -25,8 +27,9 @@
       "popular": true
     },
     {
-      "name": "Polly",
+      "id": "f68d",
       "uuid": 3,
+      "name": "Polly",
       "species": "Bird",
       "breed": "Parrot",
       "age": 3,
@@ -37,8 +40,9 @@
       "popular": true
     },
     {
-      "name": "Buddy",
+      "id": "07ba",
       "uuid": 4,
+      "name": "Buddy",
       "species": "Dog",
       "breed": "Labrador",
       "age": 1,
@@ -49,8 +53,9 @@
       "popular": false
     },
     {
-      "name": "Kiwi",
+      "id": "d15f",
       "uuid": 5,
+      "name": "Kiwi",
       "species": "Bird",
       "breed": "Kea",
       "age": 2,
@@ -61,8 +66,9 @@
       "popular": false
     },
     {
-      "name": "Luna",
+      "id": "8ddc",
       "uuid": 6,
+      "name": "Luna",
       "species": "Cat",
       "breed": "Maine Coon",
       "age": 4,
@@ -73,8 +79,9 @@
       "popular": false
     },
     {
-      "name": "Charlie",
+      "id": "63a1",
       "uuid": 7,
+      "name": "Charlie",
       "species": "Bird",
       "breed": "Macaw",
       "age": 5,
@@ -85,8 +92,9 @@
       "popular": true
     },
     {
-      "name": "Max",
+      "id": "eeaf",
       "uuid": 8,
+      "name": "Max",
       "species": "Dog",
       "breed": "Husky",
       "age": 3,
@@ -97,8 +105,9 @@
       "popular": false
     },
     {
-      "name": "Birdabe",
+      "id": "cece",
       "uuid": 9,
+      "name": "Birdabe",
       "species": "Unknown",
       "price": 450,
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4dbCwIwhQomEhhv72AeVtuYmwWk9u3nUtJXaSw-r8Mx8DAgrjiql6ykr9JS4cK-8UtEQ8iwLNNQekONiro-vDSfjNVlDxSZjk5DvUg30&s=10",
@@ -109,45 +118,53 @@
   ],
   "categories": [
     {
-      "title": "Dogs",
+      "id": "6b61",
       "uuid": 1,
+      "title": "Dogs",
       "description": "Loyal and friendly companions perfect for families"
     },
     {
-      "title": "Cats",
+      "id": "3afe",
       "uuid": 2,
+      "title": "Cats",
       "description": "Independent and graceful pets with unique personalities"
     },
     {
-      "title": "Birds",
+      "id": "4f9e",
       "uuid": 3,
+      "title": "Birds",
       "description": "Colorful and melodious friends that brighten any home"
     },
     {
-      "title": "Fish",
+      "id": "851c",
       "uuid": 4,
+      "title": "Fish",
       "description": "Peaceful aquatic companions for relaxation"
     }
   ],
   "animals_with_categories": [
     {
-      "animal_id": [1, 4, 8],
+      "id": "7b0d",
       "uuid": 1,
+      "animal_id": [1, 4, 8],
       "category_id": 1
     },
     {
-      "animal_id": [2, 6],
+      "id": "921,1",
       "uuid": 2,
+      "animal_id": [2, 6],
       "category_id": 2
     },
     {
-      "animal_id": [3, 5, 7, 9],
+      "id": "fe1e",
       "uuid": 3,
+      "animal_id": [3, 5, 7, 9],
       "category_id": 3
     },
     {
-      "animal_id": [],
+      "id": "251c",
       "uuid": 4,
+      "animal_id": [],
       "category_id": 4
     }
   ]
