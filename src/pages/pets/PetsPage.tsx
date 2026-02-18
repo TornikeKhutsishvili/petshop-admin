@@ -14,7 +14,7 @@ import {
 
 // Interfaces
 import PetCard from "../../components/pets/PetCard";
-import type { animalsList } from "../../interfaces/animals.interface";
+// import type { animalsList } from "../../interfaces/animals.interface";
 import type { categoriesList } from "../../interfaces/categories.interface";
 
 // redux store
@@ -59,14 +59,26 @@ const PetsPage: React.FC = () => {
 
     const categoryId = relation.category_id;
 
-    return categories.find((c: categoriesList) => c.id === categoryId);
+    const categoriesId = categories.find(
+      (c: categoriesList) => c.id === categoryId,
+    );
+
+    return categoriesId;
   };
+
+  const petsWithCategories = pets.map((pet) => {
+    return {
+      ...pet,
+      category: getCategoryByAnimal(pet.id),
+    };
+  });
 
   const onSelectPet = (id: string) => {
     navigate(`/pet-detail/${id}`);
   };
 
-  if (loading) return <Container>Loading pets...</Container>;
+  if (loading || categories.length === 0 || animalCategories.length === 0)
+    return <Container>Loading pets...</Container>;
   if (error) return <Container>{error}</Container>;
 
   return (
@@ -78,11 +90,11 @@ const PetsPage: React.FC = () => {
         </ActionBar>
 
         <CardsGrid>
-          {pets.map((pet: animalsList) => (
+          {petsWithCategories.map((pet) => (
             <PetCard
               key={pet.id}
               pet={pet}
-              category={getCategoryByAnimal(pet.id)}
+              category={pet.category}
               onClick={() => onSelectPet(pet.id)}
             />
           ))}

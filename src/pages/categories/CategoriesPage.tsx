@@ -85,7 +85,7 @@ const CategoriesPage: React.FC = () => {
                 key={category.id}
                 category={category}
                 petsCount={petsCount}
-                onClick={() => console.log("Category clicked", category.id)}
+                onClick={() => console.log(category.id)}
                 onEdit={handleEditCategory}
                 onDelete={handleDeleteCategory}
               />

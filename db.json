@@ -131,24 +131,24 @@
   ],
   "animals_with_categories": [
     {
-      "id": "7b0d",
+      "id": "7ws3",
       "animal_id": ["c6d7", "07ba", "eeaf"],
-      "category_id": "1"
+      "category_id": "6b61"
     },
     {
       "id": "921p",
       "animal_id": ["8454", "8ddc"],
-      "category_id": "2"
+      "category_id": "3afe"
     },
     {
       "id": "fe1e",
       "animal_id": ["f68d", "d15f", "63a1"],
-      "category_id": "3"
+      "category_id": "4f9e"
     },
     {
       "id": "251c",
       "animal_id": ["634c"],
-      "category_id": "4"
+      "category_id": "851c"
     }
   ]
 }
