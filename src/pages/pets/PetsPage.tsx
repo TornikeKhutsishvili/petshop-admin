@@ -49,23 +49,21 @@ const PetsPage: React.FC = () => {
   }, [dispatch]);
 
   const getCategoryByAnimal = (
-    animalId: number,
+    animalId: string,
   ): categoriesList | undefined => {
     const relation = animalCategories.find((r: animals_with_categoriesList) =>
-      r.animal_id.some((uuid: number) => Number(uuid) === Number(animalId)),
+      r.animal_id.some((id) => id === animalId),
     );
 
     if (!relation || !relation.category_id) return undefined;
 
-    const categoryId = Number(relation.category_id);
+    const categoryId = relation.category_id;
 
-    return categories.find(
-      (c: categoriesList) => Number(c.uuid) === Number(categoryId),
-    );
+    return categories.find((c: categoriesList) => c.id === categoryId);
   };
 
-  const onSelectPet = (uuid: number) => {
-    navigate(`/pet-detail/${uuid}`);
+  const onSelectPet = (id: string) => {
+    navigate(`/pet-detail/${id}`);
   };
 
   if (loading) return <Container>Loading pets...</Container>;
@@ -82,10 +80,10 @@ const PetsPage: React.FC = () => {
         <CardsGrid>
           {pets.map((pet: animalsList) => (
             <PetCard
-              key={pet.uuid}
+              key={pet.id}
               pet={pet}
-              category={getCategoryByAnimal(pet.uuid)}
-              onClick={() => onSelectPet(pet.uuid)}
+              category={getCategoryByAnimal(pet.id)}
+              onClick={() => onSelectPet(pet.id)}
             />
           ))}
         </CardsGrid>

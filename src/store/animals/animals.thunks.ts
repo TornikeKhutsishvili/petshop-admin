@@ -26,7 +26,7 @@ export const getAnimals = createAsyncThunk<
 /** ADD ANIMAL */
 export const addAnimal = createAsyncThunk<
   animalsList,
-  animalsList,
+  Omit<animalsList, "id">,
   { rejectValue: string }
 >("animals/addAnimal", async (animal, thunkAPI) => {
   try {
@@ -52,11 +52,11 @@ export const addAnimal = createAsyncThunk<
 /** UPDATE ANIMAL - PATCH */
 export const updateAnimal = createAsyncThunk<
   animalsList,
-  { uuid: number; animal: animalsList },
+  { id: string; animal: animalsList },
   { rejectValue: string }
->("animals/updateAnimal", async ({ uuid, animal }, thunkAPI) => {
+>("animals/updateAnimal", async ({ id, animal }, thunkAPI) => {
   try {
-    const res = await fetch(`${BASE_URL}?id=${uuid}`, {
+    const res = await fetch(`${BASE_URL}/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(animal),
@@ -77,18 +77,18 @@ export const updateAnimal = createAsyncThunk<
 
 /** DELETE ANIMAL */
 export const deleteAnimal = createAsyncThunk<
-  number,
-  number,
+  string,
+  string,
   { rejectValue: string }
->("animals/deleteAnimal", async (uuid, thunkAPI) => {
+>("animals/deleteAnimal", async (id, thunkAPI) => {
   try {
-    const res = await fetch(`${BASE_URL}?id=${uuid}`, { method: "DELETE" });
+    const res = await fetch(`${BASE_URL}/${id}`, { method: "DELETE" });
     if (!res.ok) {
       return thunkAPI.rejectWithValue(
         `Failed to delete animal: ${res.status} ${res.statusText}`,
       );
     }
-    return uuid;
+    return id;
   } catch {
     return thunkAPI.rejectWithValue("Failed to delete animal");
   }

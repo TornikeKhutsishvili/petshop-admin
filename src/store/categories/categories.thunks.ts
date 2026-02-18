@@ -26,7 +26,7 @@ export const getCategories = createAsyncThunk<
 /** ADD CATEGORY */
 export const addCategory = createAsyncThunk<
   categoriesList,
-  categoriesList,
+  Omit<categoriesList, "id">,
   { rejectValue: string }
 >("categories/addCategory", async (category, thunkAPI) => {
   try {
@@ -52,11 +52,11 @@ export const addCategory = createAsyncThunk<
 /** UPDATE CATEGORY */
 export const updateCategory = createAsyncThunk<
   categoriesList,
-  { uuid: number; category: categoriesList },
+  { id: string; category: categoriesList },
   { rejectValue: string }
->("categories/updateCategory", async ({ uuid, category }, thunkAPI) => {
+>("categories/updateCategory", async ({ id, category }, thunkAPI) => {
   try {
-    const res = await fetch(`${BASE_URL}?id=${uuid}`, {
+    const res = await fetch(`${BASE_URL}/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(category),
@@ -77,18 +77,18 @@ export const updateCategory = createAsyncThunk<
 
 /** DELETE CATEGORY */
 export const deleteCategory = createAsyncThunk<
-  number,
-  number,
+  string,
+  string,
   { rejectValue: string }
->("categories/deleteCategory", async (uuid, thunkAPI) => {
+>("categories/deleteCategory", async (id, thunkAPI) => {
   try {
-    const res = await fetch(`${BASE_URL}?id=${uuid}`, { method: "DELETE" });
+    const res = await fetch(`${BASE_URL}/${id}`, { method: "DELETE" });
     if (!res.ok) {
       return thunkAPI.rejectWithValue(
         `Failed to delete category: ${res.status} ${res.statusText}`,
       );
     }
-    return uuid;
+    return id;
   } catch {
     return thunkAPI.rejectWithValue("Failed to delete category");
   }

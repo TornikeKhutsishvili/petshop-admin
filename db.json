@@ -2,7 +2,6 @@
   "animals": [
     {
       "id": "c6d7",
-      "uuid": 1,
       "name": "Rex",
       "species": "Dog",
       "breed": "Corgi",
@@ -15,7 +14,6 @@
     },
     {
       "id": "8454",
-      "uuid": 2,
       "name": "Mittens",
       "species": "Cat",
       "breed": "British Shorthair",
@@ -28,7 +26,6 @@
     },
     {
       "id": "f68d",
-      "uuid": 3,
       "name": "Polly",
       "species": "Bird",
       "breed": "Parrot",
@@ -41,7 +38,6 @@
     },
     {
       "id": "07ba",
-      "uuid": 4,
       "name": "Buddy",
       "species": "Dog",
       "breed": "Labrador",
@@ -54,7 +50,6 @@
     },
     {
       "id": "d15f",
-      "uuid": 5,
       "name": "Kiwi",
       "species": "Bird",
       "breed": "Kea",
@@ -67,7 +62,6 @@
     },
     {
       "id": "8ddc",
-      "uuid": 6,
       "name": "Luna",
       "species": "Cat",
       "breed": "Maine Coon",
@@ -80,7 +74,6 @@
     },
     {
       "id": "63a1",
-      "uuid": 7,
       "name": "Charlie",
       "species": "Bird",
       "breed": "Macaw",
@@ -93,7 +86,6 @@
     },
     {
       "id": "eeaf",
-      "uuid": 8,
       "name": "Max",
       "species": "Dog",
       "breed": "Husky",
@@ -105,39 +97,34 @@
       "popular": false
     },
     {
-      "id": "cece",
-      "uuid": 9,
-      "name": "Birdabe",
-      "species": "Unknown",
-      "price": 450,
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4dbCwIwhQomEhhv72AeVtuYmwWk9u3nUtJXaSw-r8Mx8DAgrjiql6ykr9JS4cK-8UtEQ8iwLNNQekONiro-vDSfjNVlDxSZjk5DvUg30&s=10",
-      "description": "This is beautiful australian bird",
-      "inStock": 4,
-      "popular": true
+      "id": "634c",
+      "name": "Fishswi",
+      "species": "Fish",
+      "price": 140,
+      "inStock": 3,
+      "description": "This is beauty fish",
+      "popular": true,
+      "image": "https://earthguide.ucsd.edu/fishes/kinds/images/mandarinfish_large.jpg"
     }
   ],
   "categories": [
     {
       "id": "6b61",
-      "uuid": 1,
       "title": "Dogs",
       "description": "Loyal and friendly companions perfect for families"
     },
     {
       "id": "3afe",
-      "uuid": 2,
       "title": "Cats",
       "description": "Independent and graceful pets with unique personalities"
     },
     {
       "id": "4f9e",
-      "uuid": 3,
       "title": "Birds",
       "description": "Colorful and melodious friends that brighten any home"
     },
     {
       "id": "851c",
-      "uuid": 4,
       "title": "Fish",
       "description": "Peaceful aquatic companions for relaxation"
     }
@@ -145,27 +132,23 @@
   "animals_with_categories": [
     {
       "id": "7b0d",
-      "uuid": 1,
-      "animal_id": [1, 4, 8],
-      "category_id": 1
+      "animal_id": ["c6d7", "07ba", "eeaf"],
+      "category_id": "1"
     },
     {
-      "id": "921,1",
-      "uuid": 2,
-      "animal_id": [2, 6],
-      "category_id": 2
+      "id": "921p",
+      "animal_id": ["8454", "8ddc"],
+      "category_id": "2"
     },
     {
       "id": "fe1e",
-      "uuid": 3,
-      "animal_id": [3, 5, 7, 9],
-      "category_id": 3
+      "animal_id": ["f68d", "d15f", "63a1"],
+      "category_id": "3"
     },
     {
       "id": "251c",
-      "uuid": 4,
-      "animal_id": [],
-      "category_id": 4
+      "animal_id": ["634c"],
+      "category_id": "4"
     }
   ]
 }

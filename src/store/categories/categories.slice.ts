@@ -65,7 +65,7 @@ const categoriesSlice = createSlice({
       })
       .addCase(updateCategory.fulfilled, (state, action) => {
         const index = state.categoriesList.findIndex(
-          (u) => u.uuid === Number(action.payload.uuid),
+          (u) => u.id === action.payload.id,
         );
         if (index !== -1) {
           state.categoriesList[index] = action.payload;
@@ -85,7 +85,7 @@ const categoriesSlice = createSlice({
       })
       .addCase(deleteCategory.fulfilled, (state, action) => {
         state.categoriesList = state.categoriesList.filter(
-          (u) => u.uuid !== Number(action.payload),
+          (u) => u.id !== action.payload,
         );
         state.loading = false;
         state.error = null;

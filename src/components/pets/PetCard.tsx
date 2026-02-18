@@ -31,14 +31,14 @@ const PetCard: React.FC<Props> = ({ pet, category, onClick }) => {
   );
 
   return (
-    <Card key={pet.uuid} onClick={onClick}>
+    <Card key={pet.id} onClick={onClick}>
       <ImageDiv>
         <Image src={pet.image} alt={pet.name} />
       </ImageDiv>
 
       <Name>{pet.name}</Name>
 
-      <Category>{category?.title || "No Category"}</Category>
+      <Category>{category?.name || "No Category"}</Category>
 
       <Price>
         <PriceItemUSD>${pet.price.toFixed(2)}</PriceItemUSD>

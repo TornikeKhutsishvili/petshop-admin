@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   Container,
@@ -19,39 +19,27 @@ import {
 import { addCategory } from "../../store/categories/categories.thunks";
 import { add_animal_with_category } from "../../store/animals_with_categories/animals_with_categories.thunks";
 import type { AppDispatch } from "../../store";
-import { categoriesListSelector } from "../../store/categories/categories.slice";
-import type { categoriesList } from "../../interfaces/categories.interface";
-import type { animals_with_categoriesList } from "../../interfaces/animals_with_categories.interface";
 
 const AddCategoryPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const categories = useSelector(categoriesListSelector);
 
-  const addCategoryHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+  const addCategoryHandler = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
 
-    const maxId = categories.length
-      ? Math.max(...categories.map((c: categoriesList) => c.uuid))
-      : 0;
-
-    const nextId = maxId + 1;
-
     const newCategory = {
-      uuid: nextId,
-      title: formData.get("title") as string,
+      name: formData.get("name") as string,
       description: formData.get("description") as string,
     };
 
     try {
-      await dispatch(addCategory(newCategory)).unwrap();
+      const createdCategory = await dispatch(addCategory(newCategory)).unwrap();
 
-      const newAWC: animals_with_categoriesList = {
-        uuid: nextId,
+      const newAWC = {
+        category_id: createdCategory.id,
         animal_id: [],
-        category_id: nextId,
       };
 
       await dispatch(add_animal_with_category(newAWC)).unwrap();

@@ -65,7 +65,7 @@ const animalsSlice = createSlice({
       })
       .addCase(updateAnimal.fulfilled, (state, action) => {
         const index = state.animalsList.findIndex(
-          (u) => u.uuid === Number(action.payload.uuid),
+          (u) => u.id === action.payload.id,
         );
         if (index !== -1) {
           state.animalsList[index] = action.payload;
@@ -85,7 +85,7 @@ const animalsSlice = createSlice({
       })
       .addCase(deleteAnimal.fulfilled, (state, action) => {
         state.animalsList = state.animalsList.filter(
-          (u) => u.uuid !== Number(action.payload),
+          (u) => u.id !== action.payload,
         );
         state.loading = false;
         state.error = null;

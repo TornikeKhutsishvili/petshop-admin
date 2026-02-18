@@ -1,5 +1,5 @@
 export interface categoriesList {
-  uuid: number;
-  title: string;
+  id: string;
+  name: string;
   description: string;
 }

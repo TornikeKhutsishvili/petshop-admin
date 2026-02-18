@@ -39,18 +39,18 @@ const CategoriesPage: React.FC = () => {
     dispatch(get_animals_with_categories());
   }, [dispatch]);
 
-  const handleEditCategory = (uuid: number) => {
-    navigation(`/edit-category/${uuid}`);
+  const handleEditCategory = (id: string) => {
+    navigation(`/edit-category/${id}`);
   };
 
-  const handleDeleteCategory = async (uuid: number) => {
+  const handleDeleteCategory = async (id: string) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this category?",
     );
     if (!confirmDelete) return;
 
     try {
-      await dispatch(deleteCategory(uuid)).unwrap();
+      await dispatch(deleteCategory(id)).unwrap();
       alert("Category deleted successfully!");
     } catch (err) {
       console.error("Failed to delete category:", err);
@@ -74,9 +74,7 @@ const CategoriesPage: React.FC = () => {
         {categories &&
           categories.map((category) => {
             const petsCount = animalCategories
-              .filter(
-                (relation) => relation.category_id === Number(category.uuid),
-              )
+              .filter((relation) => relation.category_id === category.id)
               .reduce(
                 (total, relation) => total + relation.animal_id.length,
                 0,
@@ -84,10 +82,10 @@ const CategoriesPage: React.FC = () => {
 
             return (
               <CategoryCard
-                key={category.uuid}
+                key={category.id}
                 category={category}
                 petsCount={petsCount}
-                onClick={() => console.log("Category clicked", category.uuid)}
+                onClick={() => console.log("Category clicked", category.id)}
                 onEdit={handleEditCategory}
                 onDelete={handleDeleteCategory}
               />

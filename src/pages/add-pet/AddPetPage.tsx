@@ -21,7 +21,6 @@ import {
   SaveBtn,
 } from "./AddPetPage.style";
 import { categoriesListSelector } from "../../store/categories/categories.slice";
-import { animalsListSelector } from "../../store/animals/animals.slice";
 import { animalsWithCategoriesListSelector } from "../../store/animals_with_categories/animals_with_categories.slice";
 import { addAnimal, getAnimals } from "../../store/animals/animals.thunks";
 import {
@@ -38,7 +37,6 @@ const AddPetPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const categories = useSelector(categoriesListSelector);
-  const animals = useSelector(animalsListSelector);
   const animalsWithCategories = useSelector(animalsWithCategoriesListSelector);
 
   useEffect(() => {
@@ -60,18 +58,13 @@ const AddPetPage: React.FC = () => {
       isPopular: HTMLInputElement;
     };
 
-    const nextId = animals.length
-      ? Math.max(...animals.map((a) => a.uuid)) + 1
-      : 1;
-
     const selectedCategory = categories.find(
-      (c: categoriesList) => c.uuid === Number(elements.category.value),
+      (c: categoriesList) => c.id === elements.category.value,
     );
 
-    const newPet: animalsList = {
-      uuid: nextId,
+    const newPet: Omit<animalsList, "id"> = {
       name: elements.name.value.trim(),
-      species: selectedCategory?.title || "Unknown",
+      species: selectedCategory?.name || "Unknown",
       price: Number(elements.priceUSD.value),
       inStock: Number(elements.stock.value),
       description: elements.description.value.trim(),
@@ -82,8 +75,8 @@ const AddPetPage: React.FC = () => {
     try {
       const addedPet = await dispatch(addAnimal(newPet)).unwrap();
 
-      const categoryId = Number(elements.category.value);
-      console.log("categoryId", categoryId);
+      const categoryId = elements.category.value;
+
       const existingCategory = animalsWithCategories.find(
         (awc) => awc.category_id === categoryId,
       );
@@ -93,7 +86,7 @@ const AddPetPage: React.FC = () => {
         const updatedCategory: animals_with_categoriesList = {
           ...existingCategory,
           animal_id: Array.from(
-            new Set([...existingCategory.animal_id, addedPet.uuid]),
+            new Set([...existingCategory.animal_id, addedPet.id]),
           ),
           category_id: existingCategory.category_id,
         };
@@ -101,7 +94,7 @@ const AddPetPage: React.FC = () => {
 
         await dispatch(
           update_animal_with_category({
-            uuid: existingCategory.uuid,
+            id: existingCategory.id,
             category: updatedCategory,
           }),
         ).unwrap();
@@ -136,8 +129,8 @@ const AddPetPage: React.FC = () => {
             <FormSelect name="category" required>
               <Option value="">Select Category</Option>
               {categories.map((c) => (
-                <Option key={c.uuid} value={c.uuid}>
-                  {c.title}
+                <Option key={c.id} value={c.id}>
+                  {c.name}
                 </Option>
               ))}
             </FormSelect>
