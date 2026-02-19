@@ -1,5 +1,5 @@
 export interface animals_with_categoriesList {
-  id: number;
-  animal_id: number[];
-  category_id: number;
+  id: string;
+  animal_id: string[];
+  category_id: string;
 }

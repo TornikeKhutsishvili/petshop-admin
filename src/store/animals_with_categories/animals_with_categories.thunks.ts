@@ -31,7 +31,7 @@ export const get_animals_with_categories = createAsyncThunk<
 /** ADD ANIMAL WITH CATEGORY */
 export const add_animal_with_category = createAsyncThunk<
   animals_with_categoriesList,
-  animals_with_categoriesList,
+  Omit<animals_with_categoriesList, "id">,
   { rejectValue: string }
 >(
   "animals_with_categories/add_animal_with_category",
@@ -60,7 +60,7 @@ export const add_animal_with_category = createAsyncThunk<
 /** UPDATE ANIMAL WITH CATEGORY */
 export const update_animal_with_category = createAsyncThunk<
   animals_with_categoriesList,
-  { id: number; category: animals_with_categoriesList },
+  { id: string; category: animals_with_categoriesList },
   { rejectValue: string }
 >(
   "animals_with_categories/update_animal_with_category",

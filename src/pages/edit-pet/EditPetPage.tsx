@@ -29,7 +29,7 @@ const EditPetPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const pets = useSelector(animalsListSelector);
 
-  const pet = pets.find((p) => Number(p.id) === Number(id));
+  const pet = pets.find((p) => p.id === id);
 
   useEffect(() => {
     if (!pet) {

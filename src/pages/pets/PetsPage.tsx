@@ -30,9 +30,10 @@ import { getCategories } from "../../store/categories/categories.thunks";
 import { animalsWithCategoriesListSelector } from "../../store/animals_with_categories/animals_with_categories.slice";
 import type { AppDispatch } from "../../store";
 import { get_animals_with_categories } from "../../store/animals_with_categories/animals_with_categories.thunks";
+import type { animals_with_categoriesList } from "../../interfaces/animals_with_categories.interface";
 
 const PetsPage: React.FC = () => {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
   const pets = useSelector(animalsListSelector);
@@ -48,24 +49,36 @@ const PetsPage: React.FC = () => {
   }, [dispatch]);
 
   const getCategoryByAnimal = (
-    animalId: number,
+    animalId: string,
   ): categoriesList | undefined => {
-    const relation = animalCategories.find((r) =>
-      r.animal_id.some((id) => String(id) === String(animalId)),
+    const relation = animalCategories.find((r: animals_with_categoriesList) =>
+      r.animal_id.some((id) => id === animalId),
     );
 
     if (!relation || !relation.category_id) return undefined;
 
-    const categoryId = String(relation.category_id);
+    const categoryId = relation.category_id;
 
-    return categories.find((c) => String(c.id) === String(categoryId));
+    const categoriesId = categories.find(
+      (c: categoriesList) => c.id === categoryId,
+    );
+
+    return categoriesId;
   };
 
-  const onSelectPet = (id: number) => {
-    navigation(`/pet-detail/${id}`);
+  const petsWithCategories = pets.map((pet: animalsList) => {
+    return {
+      ...pet,
+      category: getCategoryByAnimal(pet.id),
+    };
+  });
+
+  const onSelectPet = (id: string) => {
+    navigate(`/pet-detail/${id}`);
   };
 
-  if (loading) return <Container>Loading pets...</Container>;
+  if (loading || categories.length === 0 || animalCategories.length === 0)
+    return <Container>Loading pets...</Container>;
   if (error) return <Container>{error}</Container>;
 
   return (
@@ -73,15 +86,15 @@ const PetsPage: React.FC = () => {
       <Page>
         <ActionBar>
           <Title>All Pets</Title>
-          <Button onClick={() => navigation("/add-pet")}>➕ Add New Pet</Button>
+          <Button onClick={() => navigate("/add-pet")}>➕ Add New Pet</Button>
         </ActionBar>
 
         <CardsGrid>
-          {pets.map((pet: animalsList) => (
+          {petsWithCategories.map((pet) => (
             <PetCard
               key={pet.id}
               pet={pet}
-              category={getCategoryByAnimal(pet.id)}
+              category={pet.category}
               onClick={() => onSelectPet(pet.id)}
             />
           ))}

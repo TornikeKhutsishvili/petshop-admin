@@ -66,7 +66,7 @@ const animals_with_categoriesSlice = createSlice({
       })
       .addCase(update_animal_with_category.fulfilled, (state, action) => {
         const index = state.animals_with_categoriesList.findIndex(
-          (u) => u.id === Number(action.payload.id),
+          (u) => u.id === action.payload.id,
         );
         if (index !== -1) {
           state.animals_with_categoriesList[index] = action.payload;
@@ -87,7 +87,7 @@ const animals_with_categoriesSlice = createSlice({
       .addCase(delete_animal_with_category.fulfilled, (state, action) => {
         state.animals_with_categoriesList =
           state.animals_with_categoriesList.filter(
-            (u) => u.id !== Number(action.payload),
+            (u) => u.id !== action.payload,
           );
         state.loading = false;
         state.error = null;

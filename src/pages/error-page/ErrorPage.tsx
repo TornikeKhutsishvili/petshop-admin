@@ -16,7 +16,7 @@ const ErrorPage: React.FC = () => {
           <Description>
             The page you are looking for does not exist or has been moved.
           </Description>
-          <BackButton to="/">Back to Coffee Menu</BackButton>
+          <BackButton to="/">Back to Menu</BackButton>
         </ErrorCard>
       </ErrorPageWrapper>
     </>

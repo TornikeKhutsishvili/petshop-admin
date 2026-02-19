@@ -49,7 +49,7 @@ export const addAnimal = createAsyncThunk<
   }
 });
 
-/** UPDATE ANIMAL */
+/** UPDATE ANIMAL - PATCH */
 export const updateAnimal = createAsyncThunk<
   animalsList,
   { id: string; animal: animalsList },

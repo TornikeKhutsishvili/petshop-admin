@@ -39,11 +39,11 @@ const CategoriesPage: React.FC = () => {
     dispatch(get_animals_with_categories());
   }, [dispatch]);
 
-  const handleEditCategory = (id: number) => {
+  const handleEditCategory = (id: string) => {
     navigation(`/edit-category/${id}`);
   };
 
-  const handleDeleteCategory = async (id: number) => {
+  const handleDeleteCategory = async (id: string) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this category?",
     );
@@ -71,22 +71,26 @@ const CategoriesPage: React.FC = () => {
       </ActionBar>
 
       <Grid>
-        {categories.map((category) => {
-          const petsCount = animalCategories
-            .filter((relation) => relation.category_id === Number(category.id))
-            .reduce((total, relation) => total + relation.animal_id.length, 0);
+        {categories &&
+          categories.map((category) => {
+            const petsCount = animalCategories
+              .filter((relation) => relation.category_id === category.id)
+              .reduce(
+                (total, relation) => total + relation.animal_id.length,
+                0,
+              );
 
-          return (
-            <CategoryCard
-              key={category.id}
-              category={category}
-              petsCount={petsCount}
-              onClick={() => console.log("Category clicked", category.id)}
-              onEdit={handleEditCategory}
-              onDelete={handleDeleteCategory}
-            />
-          );
-        })}
+            return (
+              <CategoryCard
+                key={category.id}
+                category={category}
+                petsCount={petsCount}
+                onClick={() => console.log(category.id)}
+                onEdit={handleEditCategory}
+                onDelete={handleDeleteCategory}
+              />
+            );
+          })}
       </Grid>
     </Container>
   );

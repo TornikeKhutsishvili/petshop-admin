@@ -1,5 +1,5 @@
 export interface animalsList {
-  id: number;
+  id: string;
   name: string;
   species?: string;
   breed?: string;

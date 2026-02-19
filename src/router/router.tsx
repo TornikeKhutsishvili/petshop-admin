@@ -47,7 +47,7 @@ const router: RouteObject[] = [
       },
       {
         element: <EditPetPage />,
-        path: "/edit-pet/:id",
+        path: "/pet-edit/:id",
       },
       {
         element: <EditCategoryPage />,

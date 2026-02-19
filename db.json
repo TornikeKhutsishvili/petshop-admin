@@ -1,7 +1,7 @@
 {
   "animals": [
     {
-      "id": "1",
+      "id": "c6d7",
       "name": "Rex",
       "species": "Dog",
       "breed": "Corgi",
@@ -13,7 +13,7 @@
       "popular": true
     },
     {
-      "id": "2",
+      "id": "8454",
       "name": "Mittens",
       "species": "Cat",
       "breed": "British Shorthair",
@@ -25,7 +25,7 @@
       "popular": true
     },
     {
-      "id": "3",
+      "id": "f68d",
       "name": "Polly",
       "species": "Bird",
       "breed": "Parrot",
@@ -37,7 +37,7 @@
       "popular": true
     },
     {
-      "id": "4",
+      "id": "07ba",
       "name": "Buddy",
       "species": "Dog",
       "breed": "Labrador",
@@ -49,7 +49,7 @@
       "popular": false
     },
     {
-      "id": "5",
+      "id": "d15f",
       "name": "Kiwi",
       "species": "Bird",
       "breed": "Kea",
@@ -61,7 +61,7 @@
       "popular": false
     },
     {
-      "id": "6",
+      "id": "8ddc",
       "name": "Luna",
       "species": "Cat",
       "breed": "Maine Coon",
@@ -73,7 +73,7 @@
       "popular": false
     },
     {
-      "id": "7",
+      "id": "63a1",
       "name": "Charlie",
       "species": "Bird",
       "breed": "Macaw",
@@ -85,7 +85,7 @@
       "popular": true
     },
     {
-      "id": "8",
+      "id": "eeaf",
       "name": "Max",
       "species": "Dog",
       "breed": "Husky",
@@ -97,58 +97,68 @@
       "popular": false
     },
     {
-      "id": 9,
+      "id": "634c",
+      "name": "Fishswi",
+      "species": "Fish",
+      "price": 140,
+      "inStock": 3,
+      "description": "This is beauty fish",
+      "popular": true,
+      "image": "https://earthguide.ucsd.edu/fishes/kinds/images/mandarinfish_large.jpg"
+    },
+    {
+      "id": "15df",
       "name": "Birdabe",
-      "species": "Unknown",
+      "species": "Birds",
       "price": 450,
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4dbCwIwhQomEhhv72AeVtuYmwWk9u3nUtJXaSw-r8Mx8DAgrjiql6ykr9JS4cK-8UtEQ8iwLNNQekONiro-vDSfjNVlDxSZjk5DvUg30&s=10",
-      "description": "This is beautiful australian bird",
       "inStock": 4,
-      "popular": true
+      "description": "This is beauty bird",
+      "popular": false,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4dbCwIwhQomEhhv72AeVtuYmwWk9u3nUtJXaSw-r8Mx8DAgrjiql6ykr9JS4cK-8UtEQ8iwLNNQekONiro-vDSfjNVlDxSZjk5DvUg30&s=10"
     }
   ],
   "categories": [
     {
-      "id": "1",
+      "id": "6b61",
       "title": "Dogs",
       "description": "Loyal and friendly companions perfect for families"
     },
     {
-      "id": "2",
+      "id": "3afe",
       "title": "Cats",
       "description": "Independent and graceful pets with unique personalities"
     },
     {
-      "id": "3",
+      "id": "4f9e",
       "title": "Birds",
       "description": "Colorful and melodious friends that brighten any home"
     },
     {
-      "id": "4",
+      "id": "851c",
       "title": "Fish",
       "description": "Peaceful aquatic companions for relaxation"
     }
   ],
   "animals_with_categories": [
     {
-      "id": "1",
-      "animal_id": [1, 4, 8],
-      "category_id": 1
+      "id": "7ws3",
+      "animal_id": ["c6d7", "07ba", "eeaf"],
+      "category_id": "6b61"
     },
     {
-      "id": "2",
-      "animal_id": [2, 6],
-      "category_id": 2
+      "id": "921p",
+      "animal_id": ["8454", "8ddc"],
+      "category_id": "3afe"
     },
     {
-      "id": "3",
-      "animal_id": [3, 5, 7, 9],
-      "category_id": 3
+      "id": "fe1e",
+      "animal_id": ["f68d", "d15f", "63a1", "15df"],
+      "category_id": "4f9e"
     },
     {
-      "id": "4",
-      "animal_id": [],
-      "category_id": 4
+      "id": "251c",
+      "animal_id": ["634c"],
+      "category_id": "851c"
     }
   ]
 }

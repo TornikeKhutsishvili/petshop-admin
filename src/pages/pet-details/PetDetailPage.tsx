@@ -2,10 +2,6 @@ import React from "react";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import type { animalsList } from "../../interfaces/animals.interface";
-import type { categoriesList } from "../../interfaces/categories.interface";
-import type { animals_with_categoriesList } from "../../interfaces/animals_with_categories.interface";
-
 // Styles
 import {
   Wrapper,
@@ -67,11 +63,12 @@ const PetDetailPage: React.FC = () => {
   const loading = useSelector(animalsLoadingSelector);
 
   const petId = id;
-  const pet = pets.find((p: animalsList) => String(p.id) === petId);
+  const pet = pets.find((p) => p.id === petId);
 
-  const deletePet = async (petId: number) => {
+  const deletePet = async (petId: string) => {
     try {
-      const petIdStr = String(petId);
+      const existingAnimal = pets.find((a) => a.id === petId);
+      if (!existingAnimal) return;
 
       const relation = animalCategories.find((r) =>
         r.animal_id.includes(petId),
@@ -91,22 +88,21 @@ const PetDetailPage: React.FC = () => {
         ).unwrap();
       }
 
-      await dispatch(deleteAnimal(petIdStr)).unwrap();
-
+      await dispatch(deleteAnimal(petId)).unwrap();
       navigation("/pets");
     } catch (err) {
       console.error("Failed to delete pet", err);
     }
   };
 
-  const getCategoryByAnimal = (animalId: number) => {
-    const relation = animalCategories.find((r: animals_with_categoriesList) =>
+  const getCategoryByAnimal = (animalId: string) => {
+    const relation = animalCategories.find((r) =>
       r.animal_id.includes(animalId),
     );
 
-    return categories.find(
-      (c: categoriesList) => c.id === relation?.category_id,
-    );
+    if (!relation) return undefined;
+
+    return categories.find((c) => c.id === relation?.category_id);
   };
 
   const category = pet ? getCategoryByAnimal(pet.id) : null;
