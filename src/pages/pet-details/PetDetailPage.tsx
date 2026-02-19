@@ -130,7 +130,7 @@ const PetDetailPage: React.FC = () => {
             <PetDetailName>{pet.name}</PetDetailName>
 
             <PetDetailCategory>
-              {category?.name || "No Category"}
+              {category?.title || "No Category"}
             </PetDetailCategory>
 
             <PetDetailPrices>

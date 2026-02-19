@@ -64,7 +64,7 @@ const AddPetPage: React.FC = () => {
 
     const newPet: Omit<animalsList, "id"> = {
       name: elements.name.value.trim(),
-      species: selectedCategory?.name || "Unknown",
+      species: selectedCategory?.title || "Unknown",
       price: Number(elements.priceUSD.value),
       inStock: Number(elements.stock.value),
       description: elements.description.value.trim(),
@@ -130,7 +130,7 @@ const AddPetPage: React.FC = () => {
               <Option value="">Select Category</Option>
               {categories.map((c) => (
                 <Option key={c.id} value={c.id}>
-                  {c.name}
+                  {c.title}
                 </Option>
               ))}
             </FormSelect>

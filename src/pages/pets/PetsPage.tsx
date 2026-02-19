@@ -14,7 +14,7 @@ import {
 
 // Interfaces
 import PetCard from "../../components/pets/PetCard";
-// import type { animalsList } from "../../interfaces/animals.interface";
+import type { animalsList } from "../../interfaces/animals.interface";
 import type { categoriesList } from "../../interfaces/categories.interface";
 
 // redux store
@@ -66,7 +66,7 @@ const PetsPage: React.FC = () => {
     return categoriesId;
   };
 
-  const petsWithCategories = pets.map((pet) => {
+  const petsWithCategories = pets.map((pet: animalsList) => {
     return {
       ...pet,
       category: getCategoryByAnimal(pet.id),

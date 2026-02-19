@@ -37,7 +37,7 @@ const CategoryCard: React.FC<Props> = ({
 
   return (
     <Card key={category.id} onClick={onClick}>
-      <Title>{category.name}</Title>
+      <Title>{category.title}</Title>
       <Description>{category.description}</Description>
 
       <CountPet>

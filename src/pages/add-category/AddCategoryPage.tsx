@@ -30,7 +30,8 @@ const AddCategoryPage: React.FC = () => {
     const formData = new FormData(e.currentTarget);
 
     const newCategory = {
-      name: formData.get("name") as string,
+      // form field is called title, so read the correct value
+      title: formData.get("title") as string,
       description: formData.get("description") as string,
     };
 

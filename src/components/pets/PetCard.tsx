@@ -38,7 +38,7 @@ const PetCard: React.FC<Props> = ({ pet, category, onClick }) => {
 
       <Name>{pet.name}</Name>
 
-      <Category>{category?.name || "No Category"}</Category>
+      <Category>{category?.title || "No Category"}</Category>
 
       <Price>
         <PriceItemUSD>${pet.price.toFixed(2)}</PriceItemUSD>

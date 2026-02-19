@@ -23,7 +23,7 @@ const EditCategoryPage: React.FC = () => {
   const categories = useSelector(categoriesListSelector);
   const category = categories.find((c) => c.id === categoryId);
 
-  const [name, setName] = useState<string>(category?.name || "");
+  const [title, setTitle] = useState<string>(category?.title || "");
   const [description, setDescription] = useState<string>(
     category?.description || "",
   );
@@ -42,7 +42,7 @@ const EditCategoryPage: React.FC = () => {
           id: categoryId,
           category: {
             ...category,
-            name,
+            title,
             description,
           },
         }),
@@ -68,8 +68,8 @@ const EditCategoryPage: React.FC = () => {
       <Form onSubmit={handleSave}>
         <label>Title</label>
         <Input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
           required
         />
 

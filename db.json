@@ -105,6 +105,16 @@
       "description": "This is beauty fish",
       "popular": true,
       "image": "https://earthguide.ucsd.edu/fishes/kinds/images/mandarinfish_large.jpg"
+    },
+    {
+      "id": "15df",
+      "name": "Birdabe",
+      "species": "Birds",
+      "price": 450,
+      "inStock": 4,
+      "description": "This is beauty bird",
+      "popular": false,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4dbCwIwhQomEhhv72AeVtuYmwWk9u3nUtJXaSw-r8Mx8DAgrjiql6ykr9JS4cK-8UtEQ8iwLNNQekONiro-vDSfjNVlDxSZjk5DvUg30&s=10"
     }
   ],
   "categories": [
@@ -142,7 +152,7 @@
     },
     {
       "id": "fe1e",
-      "animal_id": ["f68d", "d15f", "63a1"],
+      "animal_id": ["f68d", "d15f", "63a1", "15df"],
       "category_id": "4f9e"
     },
     {
